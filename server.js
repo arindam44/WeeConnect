@@ -60,6 +60,9 @@ app.listen(port, () => {
 });
 
 //Post Routes
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 app.get("/posts", getAllPosts);
 app.post("/post", verifyAuth, addOnePost);
 app.get("/post/:postId", verifyAuth, getOnePost);
