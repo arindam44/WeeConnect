@@ -1,2 +1,2 @@
-# WeConnect-BackEnd
-Backend of social media app WeConnect built using Node.js, Express and MongoDB
+# WeeConnect
+A Social media app WeeConnect built using MongoDB, Express.js, React.js and Node.js.
