@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const verifyAuth = require("./Modules/Func/verifyAuth");
@@ -50,6 +51,9 @@ if (process.env.NODE_ENV !== "production") {
   app.use(express.static("Client/build"));
 }
 
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "Client/build", "index.html"));
+});
 //Start Server
 app.listen(port, () => {
   console.log(`Server running on port ${port}!!!`);
