@@ -47,7 +47,7 @@ connection.once("open", () => {
   console.log(`MongoDB connected!!!`);
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static("Client/build"));
 
   app.get("*", (request, response) => {
@@ -57,7 +57,6 @@ if (process.env.NODE_ENV !== "production") {
 //Start Server
 app.listen(port, () => {
   console.log(`Server running on port ${port}!!!`);
-  console.log(path.join(__dirname, "Client/build", "index.html"));
 });
 
 //Post Routes
