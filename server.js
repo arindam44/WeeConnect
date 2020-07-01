@@ -49,20 +49,18 @@ connection.once("open", () => {
 
 if (process.env.NODE_ENV !== "production") {
   app.use(express.static("Client/build"));
-}
 
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "Client/build", "index.html"));
-});
+  app.get("*", (request, response) => {
+    response.sendFile(path.resolve(__dirname, "Client", "build", "index.html"));
+  });
+}
 //Start Server
 app.listen(port, () => {
   console.log(`Server running on port ${port}!!!`);
+  console.log(path.join(__dirname, "Client/build", "index.html"));
 });
 
 //Post Routes
-app.get("/", (req, res) => {
-  res.send("hello");
-});
 app.get("/posts", getAllPosts);
 app.post("/post", verifyAuth, addOnePost);
 app.get("/post/:postId", verifyAuth, getOnePost);
