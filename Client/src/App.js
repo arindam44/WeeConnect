@@ -32,14 +32,14 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
-        <div className='App'>
+        <div className="App">
           <BrowserRouter>
             <Navbar />
-            <div className='container'>
+            <div className="container">
               <Switch>
-                <AuthRoute exact path='/' component={home} />
-                <Route exact path='/login' component={login} />
-                <Route exact path='/signup' component={signUp} />
+                <Route exact path="/" component={home} />
+                <Route exact path="/login" component={login} />
+                <Route exact path="/signup" component={signUp} />
               </Switch>
             </div>
           </BrowserRouter>
