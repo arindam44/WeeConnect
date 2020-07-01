@@ -15,7 +15,7 @@ const onUserImageChange = () => {
                     }
                 })
                 .then(() => {
-                    return();
+                    return()
                 })
             }
         }
