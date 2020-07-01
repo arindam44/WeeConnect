@@ -49,10 +49,6 @@ connection.once("open", () => {
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "Client/build")));
-
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "Client", "build", "index.html"));
-  });
 }
 //Start Server
 app.listen(port, () => {
