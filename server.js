@@ -47,7 +47,7 @@ connection.once("open", () => {
 });
 
 if (process.env.NODE_ENV !== "production") {
-  app.use(express.static("Cliend/build"));
+  app.use(express.static("Client/build"));
 }
 
 //Start Server
