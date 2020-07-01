@@ -15,6 +15,7 @@
   "author": "Arindam Roy",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^5.1.1",
     "busboy": "^0.3.1",
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",

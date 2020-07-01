@@ -1,9 +1,13 @@
 const admin = require("firebase-admin");
 
-const serviceAccount = require("../Assets/weconnect-7a79a-firebase-adminsdk-ruueo-c11607d124.json");
+require("dotenv").config();
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    project_id: process.env.PROJECT_ID,
+    private_key: process.env.PRIVATE_KEY,
+    client_email: process.env.CLIENT_EMAIL,
+  }),
   storageBucket: "weconnect-7a79a.appspot.com",
 });
 
