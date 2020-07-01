@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const verifyAuth = require("./Modules/Func/verifyAuth");
-const uploadProfileImage = require("./Modules/User/uploadProfileImage");
+//const uploadProfileImage = require("./Modules/User/uploadProfileImage");
 const getAllPosts = require("./Modules/Post/getAllPosts");
 const addOnePost = require("./Modules/Post/addOnePost");
 const signUp = require("./Modules/User/signUp");
@@ -67,7 +67,7 @@ app.delete("/post/:postId", verifyAuth, deletePost);
 //User Routes
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
-app.post("/image", verifyAuth, uploadProfileImage);
+//app.post("/image", verifyAuth, uploadProfileImage);
 app.post("/user", verifyAuth, addUserDetails);
 app.get("/user", verifyAuth, getAuthenticatedUser);
 app.get("/user/:userHandle", getUserDetails);
