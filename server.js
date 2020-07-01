@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(multerMid.single("file"));
 
 const uri =
-  process.env.ATLAS_URI ||
+  process.env.MONGODB_URL ||
   "mongodb+srv://Admin:Admin1@cluster0-umgvh.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
