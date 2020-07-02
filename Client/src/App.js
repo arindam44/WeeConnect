@@ -33,7 +33,7 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <div className="App">
-          <BrowserRouter basename="/page">
+          <BrowserRouter>
             <Navbar />
             <div className="container">
               <Switch>
