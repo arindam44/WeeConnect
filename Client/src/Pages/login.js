@@ -55,16 +55,16 @@ class login extends Component {
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
-          <img className={classes.logo} src={logo} alt='WeConnect' />
-          <Typography variant='h2' className={classes.pageTitle}>
+          <img className={classes.logo} src={logo} alt="WeConnect" />
+          <Typography variant="h2" className={classes.pageTitle}>
             Login
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
-              id='email'
-              name='email'
-              type='email'
-              label='Email'
+              id="email"
+              name="email"
+              type="email"
+              label="Email"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.email}
@@ -74,10 +74,10 @@ class login extends Component {
             <br />
 
             <TextField
-              id='password'
-              name='password'
-              type='password'
-              label='Password'
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.password}
@@ -87,15 +87,15 @@ class login extends Component {
             <br />
 
             {errors.general && (
-              <Typography variant='body2' className={classes.customError}>
+              <Typography variant="body2" className={classes.customError}>
                 {errors.general}
               </Typography>
             )}
 
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               disabled={loading}
               className={classes.button}
               onClick={this.handleSubmit}
@@ -106,7 +106,7 @@ class login extends Component {
             <br />
 
             <small>
-              Don't have an Account? Sign Up <Link to='/signup'>Here</Link>
+              Don't have an Account? Sign Up <Link to="/page/signup">Here</Link>
             </small>
           </form>
         </Grid>

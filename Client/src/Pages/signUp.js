@@ -66,17 +66,17 @@ class signup extends Component {
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
-          <img className={classes.logo} src={logo} alt='WeConnect' />
-          <Typography variant='h2' className={classes.pageTitle}>
+          <img className={classes.logo} src={logo} alt="WeConnect" />
+          <Typography variant="h2" className={classes.pageTitle}>
             {" "}
             Signup{" "}
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
-              id='email'
-              name='email'
-              type='email'
-              label='Email'
+              id="email"
+              name="email"
+              type="email"
+              label="Email"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.email}
@@ -86,10 +86,10 @@ class signup extends Component {
             <br />
 
             <TextField
-              id='firstName'
-              name='firstName'
-              type='text'
-              label='First Name'
+              id="firstName"
+              name="firstName"
+              type="text"
+              label="First Name"
               className={classes.firstNameField}
               onChange={this.handleChange}
               helperText={errors.firstName}
@@ -97,10 +97,10 @@ class signup extends Component {
             />
 
             <TextField
-              id='lastName'
-              name='lastName'
-              type='text'
-              label='Last Name'
+              id="lastName"
+              name="lastName"
+              type="text"
+              label="Last Name"
               className={classes.lastNameField}
               onChange={this.handleChange}
               helperText={errors.lastName}
@@ -109,10 +109,10 @@ class signup extends Component {
             <br />
 
             <TextField
-              id='userHandle'
-              name='userHandle'
-              type='text'
-              label='Handle'
+              id="userHandle"
+              name="userHandle"
+              type="text"
+              label="Handle"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.userHandle}
@@ -122,10 +122,10 @@ class signup extends Component {
             <br />
 
             <TextField
-              id='password'
-              name='password'
-              type='password'
-              label='Password'
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.password}
@@ -135,10 +135,10 @@ class signup extends Component {
             <br />
 
             <TextField
-              id='confirmPassword'
-              name='confirmPassword'
-              type='text'
-              label='Confirm Password'
+              id="confirmPassword"
+              name="confirmPassword"
+              type="text"
+              label="Confirm Password"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.confirmPassword}
@@ -148,15 +148,15 @@ class signup extends Component {
             <br />
 
             {errors.general && (
-              <Typography variant='body2' className={classes.customError}>
+              <Typography variant="body2" className={classes.customError}>
                 {errors.general}
               </Typography>
             )}
 
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               disabled={loading}
               className={classes.button}
             >
@@ -166,7 +166,7 @@ class signup extends Component {
             <br />
 
             <small>
-              Already have an Account? Login <Link to='/login'>Here</Link>
+              Already have an Account? Login <Link to="/page/login">Here</Link>
             </small>
           </form>
         </Grid>
