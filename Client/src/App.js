@@ -37,9 +37,9 @@ function App() {
             <Navbar />
             <div className="container">
               <Switch>
-                <AuthRoute exact path="/" component={home} />
-                <Route exact path="/login" component={login} />
-                <Route exact path="/signup" component={signUp} />
+                <AuthRoute exact path="/page/" component={home} />
+                <Route exact path="/page/login" component={login} />
+                <Route exact path="/page/signup" component={signUp} />
               </Switch>
             </div>
           </BrowserRouter>
