@@ -4,11 +4,12 @@ let user = require("../../Models/users.model");
 let idToken;
 
 const verifyAuth = (req, res, next) => {
+  console.log(req.headers);
   if (
-    req.headers.Authorization &&
-    req.headers.Authorization.startsWith("Bearer ")
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer ")
   ) {
-    idToken = req.headers.Authorization.split("Bearer ")[1];
+    idToken = req.headers.authorization.split("Bearer ")[1];
   } else {
     console.error("No token found");
     return res.status(403).json({ error: "Unauthorized" });

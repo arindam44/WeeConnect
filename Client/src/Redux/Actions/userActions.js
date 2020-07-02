@@ -32,11 +32,11 @@ export const getUserData = (token) => (dispatch) => {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
   })
+    .then((res) => res.json())
     .then((user) => {
-      console.log(`after /user ${user}`);
+      console.log(`after /user `, user);
       dispatch({
         type: SET_USER,
         payload: user,
