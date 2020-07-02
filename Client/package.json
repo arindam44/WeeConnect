@@ -27,7 +27,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
-  "homepage": "http://weeconnect.herokuapp.com/page/",
+  "homepage": "https://weeconnect.herokuapp.com/page/",
   "eslintConfig": {
     "extends": "react-app"
   },

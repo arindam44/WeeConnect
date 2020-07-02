@@ -48,7 +48,7 @@ connection.once("open", () => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use("/page/", express.static(path.join(__dirname, "Client/build")));
+  app.use("/", express.static(path.join(__dirname, "Client/build")));
 
   app.get("/page/*", (req, res) => {
     res.sendFile(path.join(__dirname, "Client/build/index.html"));

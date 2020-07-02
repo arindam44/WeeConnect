@@ -33,14 +33,13 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <div className="App">
-          <BrowserRouter>
+          <BrowserRouter basename="/page">
             <Navbar />
             <div className="container">
               <Switch>
                 <Route
-                  basename={process.env.PUBLIC_URL}
                   exact
-                  path="/"
+                  path={`${process.env.PUBLIC_URL}/`}
                   component={home}
                 />
                 <Route exact path="/login" component={login} />
