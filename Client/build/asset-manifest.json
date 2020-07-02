@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/page/static/css/main.2964ecb1.chunk.css",
-    "main.js": "/page/static/js/main.fec102fb.chunk.js",
-    "main.js.map": "/page/static/js/main.fec102fb.chunk.js.map",
-    "runtime-main.js": "/page/static/js/runtime-main.8506b644.js",
-    "runtime-main.js.map": "/page/static/js/runtime-main.8506b644.js.map",
-    "static/js/2.7feeab3b.chunk.js": "/page/static/js/2.7feeab3b.chunk.js",
-    "static/js/2.7feeab3b.chunk.js.map": "/page/static/js/2.7feeab3b.chunk.js.map",
-    "index.html": "/page/index.html",
-    "precache-manifest.ea804aba2c8502e9ec9146775ae7b2a7.js": "/page/precache-manifest.ea804aba2c8502e9ec9146775ae7b2a7.js",
-    "service-worker.js": "/page/service-worker.js",
-    "static/css/main.2964ecb1.chunk.css.map": "/page/static/css/main.2964ecb1.chunk.css.map",
-    "static/js/2.7feeab3b.chunk.js.LICENSE.txt": "/page/static/js/2.7feeab3b.chunk.js.LICENSE.txt",
-    "static/media/logo.png": "/page/static/media/logo.ade85996.png",
-    "static/media/no-image.png": "/page/static/media/no-image.77f5794e.png"
+    "main.css": "/static/css/main.2964ecb1.chunk.css",
+    "main.js": "/static/js/main.86f31cf9.chunk.js",
+    "main.js.map": "/static/js/main.86f31cf9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fc75219d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fc75219d.js.map",
+    "static/js/2.7feeab3b.chunk.js": "/static/js/2.7feeab3b.chunk.js",
+    "static/js/2.7feeab3b.chunk.js.map": "/static/js/2.7feeab3b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4ad0fc07b45c653cfce9d915ee7d8836.js": "/precache-manifest.4ad0fc07b45c653cfce9d915ee7d8836.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.2964ecb1.chunk.css.map": "/static/css/main.2964ecb1.chunk.css.map",
+    "static/js/2.7feeab3b.chunk.js.LICENSE.txt": "/static/js/2.7feeab3b.chunk.js.LICENSE.txt",
+    "static/media/logo.png": "/static/media/logo.ade85996.png",
+    "static/media/no-image.png": "/static/media/no-image.77f5794e.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.8506b644.js",
+    "static/js/runtime-main.fc75219d.js",
     "static/js/2.7feeab3b.chunk.js",
     "static/css/main.2964ecb1.chunk.css",
-    "static/js/main.fec102fb.chunk.js"
+    "static/js/main.86f31cf9.chunk.js"
   ]
 }
