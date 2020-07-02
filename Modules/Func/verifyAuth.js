@@ -5,10 +5,10 @@ let idToken;
 
 const verifyAuth = (req, res, next) => {
   if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer ")
+    req.headers.Authorization &&
+    req.headers.Authorization.startsWith("Bearer ")
   ) {
-    idToken = req.headers.authorization.split("Bearer ")[1];
+    idToken = req.headers.Authorization.split("Bearer ")[1];
   } else {
     console.error("No token found");
     return res.status(403).json({ error: "Unauthorized" });

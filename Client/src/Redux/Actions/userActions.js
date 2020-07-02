@@ -28,7 +28,6 @@ export const loginUser = (userdata, history) => (dispatch) => {
 
 export const getUserData = (token) => (dispatch) => {
   dispatch({ type: LOADING_USER });
-  console.log("calling set_user");
   fetch("/user", {
     method: "GET",
     headers: {
@@ -37,7 +36,7 @@ export const getUserData = (token) => (dispatch) => {
     },
   })
     .then((user) => {
-      console.log(user);
+      console.log(`after /user ${user}`);
       dispatch({
         type: SET_USER,
         payload: user,
