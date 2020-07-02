@@ -17,7 +17,7 @@ const signIn = (req, res) => {
     .signInWithEmailAndPassword(loginUser.email, loginUser.password)
     .then((data) => {
       data.user.getIdToken().then((token) => {
-        return res.json({ token });
+        return res.status(200).json({ token });
       });
     })
     .catch((err) => {

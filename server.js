@@ -48,7 +48,30 @@ connection.once("open", () => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use("/", express.static(path.join(__dirname, "Client/build")));
+  app.use(express.static(path.join(__dirname, "Client/build")));
+
+  //Post Routes
+  app.get("/posts", getAllPosts);
+  app.post("/post", verifyAuth, addOnePost);
+  app.get("/post/:postId", verifyAuth, getOnePost);
+  app.post("/post/:postId/comment", verifyAuth, commentOnPost);
+  app.get("/post/:postId/like", verifyAuth, likePost);
+  app.get("/post/:postId/unlike", verifyAuth, unlikePost);
+  app.delete("/post/:postId", verifyAuth, deletePost);
+
+  //User Routes
+  app.post("/signUp", signUp);
+  app.post("/signIn", signIn);
+  //app.post("/image", verifyAuth, uploadProfileImage);
+  app.post("/user", verifyAuth, addUserDetails);
+  app.get("/user", verifyAuth, getAuthenticatedUser);
+  app.get("/user/:userHandle", getUserDetails);
+  app.post("/notifications", verifyAuth, markNotificationsRead);
+
+  //Notification
+  likeNotification();
+  commentNotification();
+  deleteNotificationOnUnlike();
 
   app.get("/page/*", (req, res) => {
     res.sendFile(path.join(__dirname, "Client/build/index.html"));
@@ -59,26 +82,3 @@ if (process.env.NODE_ENV === "production") {
 app.listen(port, () => {
   console.log(`Server running on port ${port}!!!`);
 });
-
-//Post Routes
-app.get("/posts", getAllPosts);
-app.post("/post", verifyAuth, addOnePost);
-app.get("/post/:postId", verifyAuth, getOnePost);
-app.post("/post/:postId/comment", verifyAuth, commentOnPost);
-app.get("/post/:postId/like", verifyAuth, likePost);
-app.get("/post/:postId/unlike", verifyAuth, unlikePost);
-app.delete("/post/:postId", verifyAuth, deletePost);
-
-//User Routes
-app.post("/signUp", signUp);
-app.post("/signIn", signIn);
-//app.post("/image", verifyAuth, uploadProfileImage);
-app.post("/user", verifyAuth, addUserDetails);
-app.get("/user", verifyAuth, getAuthenticatedUser);
-app.get("/user/:userHandle", getUserDetails);
-app.post("/notifications", verifyAuth, markNotificationsRead);
-
-//Notification
-likeNotification();
-commentNotification();
-deleteNotificationOnUnlike();
