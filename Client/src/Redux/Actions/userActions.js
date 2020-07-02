@@ -26,13 +26,11 @@ export const loginUser = (userdata, history) => (dispatch) => {
     });
 };
 
-export const getUserData = () => (dispatch) => {
+export const getUserData = (token) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   console.log("calling set_user");
   fetch("/user", {
     method: "GET",
-    withCredentials: true,
-    credentials: "include",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
