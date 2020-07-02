@@ -13,8 +13,8 @@ export const loginUser = (userdata, history) => (dispatch) => {
   axios
     .post("/signIn", userdata)
     .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch(getUserData());
+      //setAuthorizationHeader(res.data.token);
+      dispatch(getUserData(res.data.token));
       dispatch({ type: CLEAR_ERRORS });
       history.push("/");
     })
@@ -29,9 +29,17 @@ export const loginUser = (userdata, history) => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   console.log("calling set_user");
-  fetch("/user")
-    .then((res) => res.json())
+  fetch("/user", {
+    method: "GET",
+    withCredentials: true,
+    credentials: "include",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
     .then((user) => {
+      console.log(user);
       dispatch({
         type: SET_USER,
         payload: user,
