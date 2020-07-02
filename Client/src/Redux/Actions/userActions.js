@@ -47,7 +47,7 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      history.push("/page/");
+      history.push("/");
     })
     .catch((err) => {
       dispatch({

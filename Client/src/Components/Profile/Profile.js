@@ -45,7 +45,7 @@ class Profile extends Component {
 
   handleLogout = () => {
     this.props.logoutUser();
-    this.props.history.push("/page/login");
+    this.props.history.push("/login");
   };
   render() {
     const {
