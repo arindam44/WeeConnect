@@ -33,9 +33,15 @@ export default function (state = initialState, action) {
       let index = state.posts.findIndex(
         (post) => post._id === action.payload._id
       );
+
       state.posts[index] = action.payload;
-      if (state.post._id === action.payload._id) {
-        state.post = action.payload;
+      if (state.post.postData._id === action.payload._id) {
+        if (action.type === "LIKE_POST") {
+          state.post.postData.likeCount++;
+        } else {
+          state.post.postData.likeCount--;
+        }
+        //state.post.postData = action.payload;
       }
       return {
         ...state,

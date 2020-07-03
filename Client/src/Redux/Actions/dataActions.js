@@ -27,26 +27,41 @@ export const getPosts = () => (dispatch) => {
 };
 
 export const likePost = (postId) => (dispatch) => {
-  axios
-    .get(`/post/${postId}/like`)
+  fetch(`/post/${postId}/like`, {
+    method: "GET",
+    headers: {
+      Authorization: localStorage.IdToken,
+    },
+  })
+    .then((res) => res.json())
     .then((res) => {
-      dispatch({ type: LIKE_POST, payload: res.data });
+      dispatch({ type: LIKE_POST, payload: res });
     })
     .catch((err) => console.log(err));
 };
 
 export const unlikePost = (postId) => (dispatch) => {
-  axios
-    .get(`/post/${postId}/unlike`)
+  fetch(`/post/${postId}/unlike`, {
+    method: "GET",
+    headers: {
+      Authorization: localStorage.IdToken,
+    },
+  })
+    .then((res) => res.json())
     .then((res) => {
-      dispatch({ type: UNLIKE_POST, payload: res.data });
+      console.log(res);
+      dispatch({ type: UNLIKE_POST, payload: res });
     })
     .catch((err) => console.log(err));
 };
 
 export const deletePost = (postId) => (dispatch) => {
   axios
-    .delete(`/post/${postId}`)
+    .delete(`/post/${postId}`, {
+      headers: {
+        Authorization: localStorage.IdToken,
+      },
+    })
     .then(() => {
       dispatch({ type: DELETE_POST, payload: postId });
     })
@@ -57,7 +72,12 @@ export const addPost = (newPost) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   console.log("before axios...." + newPost.body);
   axios
-    .post("/post", newPost)
+    .post("/post", newPost, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => {
       console.log("axios then");
       dispatch({ type: ADD_POST, payload: res.data });
@@ -74,7 +94,12 @@ export const getPost = (postId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   console.log(postId);
   axios
-    .get(`/post/${postId}`)
+    .get(`/post/${postId}`, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => {
       console.log(res.data.comments);
       dispatch({ type: SET_POST, payload: res.data });
@@ -85,7 +110,12 @@ export const getPost = (postId) => (dispatch) => {
 
 export const addComment = (postId, body) => (dispatch) => {
   axios
-    .post(`/post/${postId}/comment`, body)
+    .post(`/post/${postId}/comment`, body, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => {
       dispatch({ type: SUBMIT_COMMENT, payload: res.data });
       dispatch(clearErrors());

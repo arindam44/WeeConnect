@@ -24,6 +24,11 @@ class login extends Component {
       errors: {},
     };
   }
+  componentWillMount() {
+    if (this.props.user.authenticated === true) {
+      this.props.history.push("/");
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({

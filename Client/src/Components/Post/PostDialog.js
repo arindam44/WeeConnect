@@ -30,7 +30,7 @@ const styles = (theme) => ({
     top: "3.5%",
   },
   profileImage: {
-    maxWidth: 120,
+    width: 120,
     height: 120,
     borderRadius: "50%",
     objectFit: "cover",
@@ -61,6 +61,10 @@ class PostDialog extends Component {
     this.setState({ open: false });
     this.props.clearErrors();
   };
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props.post.postData);
+    console.log("NEW------", nextProps.post.postData);
+  }
   render() {
     const {
       classes,

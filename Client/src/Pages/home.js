@@ -7,6 +7,12 @@ import Profile from "../Components/Profile/Profile";
 import PropTypes from "prop-types";
 
 export class home extends Component {
+  componentWillMount() {
+    console.log("AUTH------------", this.props.authenticated);
+    if (this.props.authenticated === false) {
+      this.props.history.push("/login");
+    }
+  }
   componentDidMount() {
     this.props.getPosts();
   }
@@ -33,10 +39,12 @@ export class home extends Component {
 home.propTypes = {
   getPosts: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.data,
+  authenticated: state.user.authenticated,
 });
 
 export default connect(mapStateToProps, { getPosts })(home);

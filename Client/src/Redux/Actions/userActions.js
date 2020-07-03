@@ -13,10 +13,13 @@ export const loginUser = (userdata, history) => (dispatch) => {
   axios
     .post("/signIn", userdata)
     .then((res) => {
-      //setAuthorizationHeader(res.data.token);
-      dispatch(getUserData(res.data.token));
+      // setAuthorizationHeader(res.data.token);
+      saveIdTokenInLocalStorage(res.data.token);
+      dispatch(getUserData(history));
       dispatch({ type: CLEAR_ERRORS });
-      history.push("/");
+      /* setTimeout(() => {
+        history.push("/");
+      }, 3000);*/
     })
     .catch((err) => {
       dispatch({
@@ -25,13 +28,32 @@ export const loginUser = (userdata, history) => (dispatch) => {
       });
     });
 };
+/*
+const setAuthorizationHeader = (token) => {
+  const IdToken = `Bearer ${token}`;
+  localStorage.setItem("IdToken", IdToken);
+ // axios.defaults.headers.common["Authorization"] = IdToken;
 
-export const getUserData = (token) => (dispatch) => {
+ 
+};
+
+const defaultOptions =(token)=> ({
+  headers:{
+    'Authorization':  `Bearer ${token}`
+  }
+});
+*/
+
+const saveIdTokenInLocalStorage = (token) => {
+  const IdToken = `Bearer ${token}`;
+  localStorage.setItem("IdToken", IdToken);
+};
+export const getUserData = (history) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   fetch("/user", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: localStorage.getItem("IdToken"),
     },
   })
     .then((res) => res.json())
@@ -41,6 +63,7 @@ export const getUserData = (token) => (dispatch) => {
         type: SET_USER,
         payload: user,
       });
+      history.push("/");
     })
     .catch((err) => console.log(err));
 };
@@ -50,7 +73,8 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
   axios
     .post("/signUp", newUserdata)
     .then((res) => {
-      setAuthorizationHeader(res.data.token);
+      //setAuthorizationHeader(res.data.token);
+      saveIdTokenInLocalStorage(res.data.token);
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
       history.push("/");
@@ -65,20 +89,19 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("IdToken");
-  delete axios.defaults.headers.common["Authorization"];
+  // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
-};
-
-const setAuthorizationHeader = (token) => {
-  const IdToken = `Bearer ${token}`;
-  localStorage.setItem("IdToken", IdToken);
-  axios.defaults.headers.common["Authorization"] = IdToken;
 };
 
 export const uploadProfileImage = (formdata) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/image", formdata)
+    .post("/image", formdata, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+        "Content-Type": "application/json",
+      },
+    })
     .then(() => {
       dispatch(getUserData());
     })
@@ -90,7 +113,12 @@ export const uploadProfileImage = (formdata) => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post("/user", userDetails)
+    .post("/user", userDetails, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+        "Content-Type": "application/json",
+      },
+    })
     .then(() => {
       dispatch(getUserData());
     })

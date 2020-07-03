@@ -15,15 +15,15 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 import AuthRoute from "./Util/AuthRoute";
 
-const token = localStorage.IdToken;
+const token = localStorage.getItem("IdToken");
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(logoutUser());
-    window.location.href = "/login";
+    window.location.href = "/page/login";
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
-    axios.defaults.headers.common["Authorization"] = token;
+    //axios.defaults.headers.common["Authorization"] = token;
     store.dispatch(getUserData());
   }
 }
@@ -37,7 +37,7 @@ function App() {
             <Navbar />
             <div className="container">
               <Switch>
-                <AuthRoute exact path="/" component={home} />
+                <Route exact path="/" component={home} />
                 <Route exact path="/login" component={login} />
                 <Route exact path="/signup" component={signUp} />
               </Switch>
