@@ -63,7 +63,7 @@ app.delete("/post/:postId", verifyAuth, deletePost);
 //User Routes
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
-app.post("/image", verifyAuth, uploadProfileImage);
+app.post("/image", uploadProfileImage);
 app.post("/user", verifyAuth, addUserDetails);
 app.get("/user", verifyAuth, getAuthenticatedUser);
 app.get("/user/:userHandle", getUserDetails);

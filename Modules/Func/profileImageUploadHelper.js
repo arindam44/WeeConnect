@@ -4,7 +4,8 @@ const util = require("util");
 
 const bucket = storage.bucket("weconnect-7a79a.appspot.com");
 
-const profileImageUploadHelper = (file) =>
+const profileImageUploadHelper = (file) => {
+  console.log("reached helper");
   new Promise((resolve, reject) => {
     const { originalname, buffer } = file;
     const blob = bucket.file(originalname.replace(/ /g, "_"));
@@ -28,5 +29,6 @@ const profileImageUploadHelper = (file) =>
       })
       .end(buffer);
   });
+};
 
 module.exports = profileImageUploadHelper;
