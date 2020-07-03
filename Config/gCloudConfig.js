@@ -1,6 +1,6 @@
 const { Storage } = require("@google-cloud/storage");
 const path = require("path");
-const servicekey = require("../Assets/weconnect-7a79a-7722933295ec.json");
+//const servicekey = require("../Assets/weconnect-7a79a-7722933295ec.json");
 
 let storage = null;
 if (process.env.NODE_ENV === "production") {
