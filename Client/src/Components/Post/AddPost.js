@@ -122,6 +122,7 @@ class AddPost extends Component {
                 color="primary"
                 className={classes.submitButton}
                 disabled={loading}
+                onClick={this.handleSubmit}
               >
                 Submit
                 {loading && (
