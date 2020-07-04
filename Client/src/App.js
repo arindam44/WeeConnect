@@ -12,7 +12,7 @@ import login from "./Pages/login";
 import signUp from "./Pages/signUp";
 import Navbar from "./Components/NavBar/Navbar";
 import jwtDecode from "jwt-decode";
-import axios from "axios";
+//import user from "./Pages/user";
 import AuthRoute from "./Util/AuthRoute";
 
 const token = localStorage.getItem("IdToken");

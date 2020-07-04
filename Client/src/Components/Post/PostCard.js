@@ -62,7 +62,7 @@ class PostCard extends Component {
               {post.userHandle}
             </Typography>
             {deleteButton}
-            <Typography variant="body1"> {post.content} </Typography>
+            <Typography variant="body1">{post.content}</Typography>
             <Typography variant="caption" color="textSecondary">
               {dayjs(post.createdAt).fromNow()}
             </Typography>

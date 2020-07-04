@@ -11,28 +11,40 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
+import Picker from "emoji-picker-react";
 
 //ICONS
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
+import Emoji from "@material-ui/icons/InsertEmoticonSharp";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  textField: {
+    width: "90%",
+  },
   notchedOutline: {
     borderColor: "white !important",
+  },
+  emojiPicker: {
+    position: "relative",
+    left: "50%",
+    height: "300px",
+    marginBottom: "20px",
   },
   submitButton: {
     position: "relative",
     left: "84%",
+    marginTop: "10px",
   },
   progressSpinner: {
     position: "absolute",
   },
   closeButton: {
     position: "absolute",
+    top: "20px",
     left: "93%",
-    top: "10%",
   },
 });
 
@@ -41,6 +53,7 @@ class AddPost extends Component {
     open: false,
     body: "",
     errors: {},
+    emojiOpen: false,
   };
   handleOpen = () => {
     this.setState({ open: true });
@@ -50,11 +63,26 @@ class AddPost extends Component {
     this.setState({ open: false, errors: {} });
   };
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.value);
+    if (event.target.value === "\n") {
+      this.setState({ [event.target.name]: "<br />" });
+    } else {
+      this.setState({ [event.target.name]: event.target.value });
+    }
   };
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addPost({ body: this.state.body });
+  };
+  openPicker = () => {
+    this.setState({ emojiOpen: !this.state.emojiOpen });
+  };
+  handleEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject.emoji);
+    this.setState({ body: this.state.body + emojiObject.emoji });
+  };
+  closeEmojiPicket = () => {
+    this.setState({ emojiOpen: false });
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
@@ -87,35 +115,51 @@ class AddPost extends Component {
           fullWidth
           maxWidth="sm"
         >
-          <Tooltip
-            title="Close"
-            onClick={this.handleClose}
-            className={classes.closeButton}
-          >
-            <CloseIcon />
-          </Tooltip>
-
           <DialogContent>
-            <Typography variant="h6">Create Post</Typography>
+            <div>
+              <Typography variant="h6">Create Post</Typography>
+              <Tooltip
+                title="Close"
+                onClick={this.handleClose}
+                className={classes.closeButton}
+              >
+                <CloseIcon />
+              </Tooltip>
+            </div>
             <form>
               <TextField
                 name="body"
                 type="text"
                 variant="outlined"
                 placeholder="Write something..."
-                fullWidth
                 multiline
                 autoFocus="true"
                 error={errors.body ? true : false}
                 helperText={errors.body}
                 className={classes.textField}
                 onChange={this.handleChange}
+                value={this.state.body}
+                onClick={this.closeEmojiPicket}
                 InputProps={{
                   classes: {
                     notchedOutline: classes.notchedOutline,
                   },
                 }}
               />
+              <Tooltip title="Insert Emoji" placement="top">
+                <IconButton onClick={this.openPicker}>
+                  <Emoji />
+                </IconButton>
+              </Tooltip>
+              {this.state.emojiOpen && (
+                <div className={classes.emojiPicker}>
+                  <Picker
+                    disableSkinTonePicker="true"
+                    disableSearchBar="true"
+                    onEmojiClick={this.handleEmojiClick}
+                  />
+                </div>
+              )}
               <Button
                 type="submit"
                 variant="contained"
