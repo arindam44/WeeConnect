@@ -62,26 +62,27 @@ class PostDialog extends Component {
     this.props.clearErrors();
   };
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.post.postData);
-    console.log("NEW------", nextProps.post.postData);
+    console.log("NEW------", nextProps.post, nextProps.comments);
   }
   render() {
     const {
       classes,
       post,
+      comments,
       UI: { loading },
     } = this.props;
-    console.log(post.postData);
+    console.log(post);
+    console.log(comments);
     const dialogMarkup = loading ? (
       <div className={classes.spinnerDiv}>
         <CircularProgress size={100} thickness={2} />
       </div>
     ) : (
-      post.postData && (
+      post && (
         <Grid container spacing={12}>
           <Grid item xs={4}>
             <img
-              src={post.postData.userImage}
+              src={post.userImage}
               alt={image}
               className={classes.profileImage}
             />
@@ -97,22 +98,22 @@ class PostDialog extends Component {
             </Typography>
             <hr className={classes.invisibleSeparator} />
             <Typography variant="body2" color="textSecondary">
-              {dayjs(post.postData.createdAt).format("h:mm a, MMMM DD YYYY")}
+              {dayjs(post.createdAt).format("h:mm a, MMMM DD YYYY")}
             </Typography>
             <hr className={classes.invisibleSeparator} />
-            <Typography variant="body1">{post.postData.content}</Typography>
-            <Likebutton postId={post.postData._id} />
-            <span>{post.postData.likeCount} Likes</span>
+            <Typography variant="body1">{post.content}</Typography>
+            <Likebutton postId={post._id} />
+            <span>{post.likeCount} Likes</span>
             <Tooltip title="Comments" placement="top">
               <IconButton>
                 <ChatIcon color="primary" />
               </IconButton>
             </Tooltip>
-            <span>{post.postData.commentCount} Comments</span>
+            <span>{post.commentCount} Comments</span>
           </Grid>
           <hr className={classes.visibleSeperator} />
-          <CommentForm postId={post.postData._id} />
-          <Comments comments={post.comments} />
+          <CommentForm postId={post._id} />
+          <Comments comments={comments} />
         </Grid>
       )
     );
@@ -152,10 +153,12 @@ PostDialog.propTypes = {
   userHandle: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
+  comments: PropTypes.array.isRequired,
   UI: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   post: state.data.post,
+  comments: state.data.comments,
   UI: state.UI,
 });
 

@@ -14,7 +14,6 @@ const verifyAuth = (req, res, next) => {
     return res.status(403).json({ error: "Unauthorized" });
   }
   const decodedToken = jwt.decode(idToken);
-  console.log(decodedToken);
   req.user = decodedToken;
   user
     .findOne({ fbAuthId: req.user.user_id })

@@ -27,30 +27,31 @@ export const getPosts = () => (dispatch) => {
 };
 
 export const likePost = (postId) => (dispatch) => {
-  fetch(`/post/${postId}/like`, {
-    method: "GET",
-    headers: {
-      Authorization: localStorage.IdToken,
-    },
-  })
-    .then((res) => res.json())
+  axios
+    .get(`/post/${postId}/like`, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+      },
+    })
     .then((res) => {
-      dispatch({ type: LIKE_POST, payload: res });
+      console.log("response from like---", res.data);
+      dispatch({ type: LIKE_POST, payload: res.data });
+      console.log("like_post called---", res.data);
     })
     .catch((err) => console.log(err));
 };
 
 export const unlikePost = (postId) => (dispatch) => {
-  fetch(`/post/${postId}/unlike`, {
-    method: "GET",
-    headers: {
-      Authorization: localStorage.IdToken,
-    },
-  })
-    .then((res) => res.json())
+  axios
+    .get(`/post/${postId}/unlike`, {
+      headers: {
+        Authorization: localStorage.getItem("IdToken"),
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch({ type: UNLIKE_POST, payload: res });
+      console.log("response from unlike---", res.data);
+      dispatch({ type: UNLIKE_POST, payload: res.data });
+      console.log("unlike_post called---", res.data);
     })
     .catch((err) => console.log(err));
 };
@@ -97,11 +98,10 @@ export const getPost = (postId) => (dispatch) => {
     .get(`/post/${postId}`, {
       headers: {
         Authorization: localStorage.getItem("IdToken"),
-        "Content-Type": "application/json",
       },
     })
     .then((res) => {
-      console.log(res.data.comments);
+      console.log("POST-----", res.data);
       dispatch({ type: SET_POST, payload: res.data });
       dispatch({ type: STOP_LOADING_UI });
     })

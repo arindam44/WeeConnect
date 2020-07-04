@@ -10,6 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 
 //ICONS
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -18,6 +19,9 @@ import AddIcon from "@material-ui/icons/Add";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  notchedOutline: {
+    borderColor: "white !important",
+  },
   submitButton: {
     position: "relative",
     left: "84%",
@@ -90,21 +94,27 @@ class AddPost extends Component {
           >
             <CloseIcon />
           </Tooltip>
-          <DialogTitle> Add a new Post</DialogTitle>
+
           <DialogContent>
-            <form onSubmit={this.handleSubmit}>
+            <Typography variant="h6">Create Post</Typography>
+            <form>
               <TextField
                 name="body"
                 type="text"
-                label="POST!"
-                multiline
+                variant="outlined"
+                placeholder="Write something..."
                 fullWidth
-                rows="3"
-                placeholder="Enter a text"
+                multiline
+                autoFocus="true"
                 error={errors.body ? true : false}
                 helperText={errors.body}
                 className={classes.textField}
                 onChange={this.handleChange}
+                InputProps={{
+                  classes: {
+                    notchedOutline: classes.notchedOutline,
+                  },
+                }}
               />
               <Button
                 type="submit"

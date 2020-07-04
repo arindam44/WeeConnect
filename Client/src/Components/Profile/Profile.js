@@ -23,7 +23,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
-import ExitToApp from "@material-ui/icons/ExitToApp";
+import LogOutIcon from "@material-ui/icons/PowerSettingsNew";
 
 const styles = (theme) => ({ ...theme.spreadThis });
 
@@ -35,7 +35,7 @@ class Profile extends Component {
     event.preventDefault();
     const image = event.target.files[0];
     const formData = new FormData();
-    //formData.append("file", image, image.name);
+    formData.append("file", image, image.name);
     this.props.uploadProfileImage(formData);
   };
   handleEditImage = () => {
@@ -128,7 +128,7 @@ class Profile extends Component {
           </div>
           <ToolTip title="LogOut" placement="top">
             <IconButton onClick={this.handleLogout}>
-              <ExitToApp color="primary" />
+              <LogOutIcon color="secondary" />
             </IconButton>
           </ToolTip>
           <EditDetails />

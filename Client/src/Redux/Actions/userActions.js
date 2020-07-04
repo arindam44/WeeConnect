@@ -95,16 +95,21 @@ export const logoutUser = () => (dispatch) => {
 
 export const uploadProfileImage = (formdata) => (dispatch) => {
   dispatch({ type: LOADING_USER });
-  fetch("/image", {
+  /*fetch("/image", {
     method: "POST",
-    credentials: "include",
     headers: {
       Authorization: localStorage.IdToken,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formdata),
-  })
-    .then((res) => {
+  })*/
+  axios
+    .post("/image", formdata, {
+      headers: {
+        Authorization: localStorage.IdToken,
+      },
+    })
+    .then(() => {
       dispatch(getUserData());
     })
     .catch((err) => {

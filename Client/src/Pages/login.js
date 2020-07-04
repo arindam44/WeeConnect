@@ -9,7 +9,14 @@ import logo from "../Images/logo.png";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+//ICONS
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -22,6 +29,7 @@ class login extends Component {
       email: "",
       password: "",
       errors: {},
+      visibility: false,
     };
   }
   componentWillMount() {
@@ -44,11 +52,13 @@ class login extends Component {
     };
     this.props.loginUser(userdata, this.props.history);
   };
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  };
+  toogleVisisibility = (event) => {
+    this.setState({ visibility: !this.state.visibility });
   };
   render() {
     const {
@@ -81,13 +91,35 @@ class login extends Component {
             <TextField
               id="password"
               name="password"
-              type="password"
+              type={this.state.visibility ? "text" : "password"}
               label="Password"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.password}
               error={errors.password ? true : false}
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Tooltip
+                      title={
+                        this.state.visibility
+                          ? "Hide Password"
+                          : "Show Password"
+                      }
+                      placement="top"
+                    >
+                      <IconButton onClick={this.toogleVisisibility}>
+                        {this.state.visibility ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </InputAdornment>
+                ),
+              }}
             />
             <br />
 
