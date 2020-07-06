@@ -6,12 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd Client && npm start",
-    "start": "nodemon server.js",
+    "start": "node gcpSetup.js && nodemon server.js",
     "build": "cd Client && npm run build",
     "install-client": "cd Client && npm install",
-    "heroku-preinstall": "node gcpSetup.js",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon server.js\" \"npm run client\""
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm start\" \"npm run client\""
   },
   "author": "Arindam Roy",
   "license": "ISC",

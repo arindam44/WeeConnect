@@ -15,6 +15,17 @@ import { signupUser } from "../Redux/Actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  link: {
+    color: theme.spreadThis.palette.primary.main,
+  },
+  firstNameField: {
+    width: "49%",
+    marginRight: "1%",
+  },
+  lastNameField: {
+    width: "49%",
+    marginLeft: "1%",
+  },
 });
 
 class signup extends Component {
@@ -171,7 +182,10 @@ class signup extends Component {
             <br />
 
             <small>
-              Already have an Account? Login <Link to="/login">Here</Link>
+              Already have an Account? Login{" "}
+              <Link to="/login" className={classes.link}>
+                <b>Here</b>
+              </Link>
             </small>
           </form>
         </Grid>

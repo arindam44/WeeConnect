@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { markNotificationsRead } from "../Redux/Actions/userActions";
+import { markNotificationsRead } from "../../Redux/Actions/userActions";
 
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,7 +12,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
-import Popper from "@material-ui/core/Popper";
+import { grey } from "@material-ui/core/colors";
 
 //ICONS
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -49,12 +49,14 @@ class Notifications extends Component {
       unreadNotifications > 0
         ? (notificationIcon = (
             <Badge badgeContent={unreadNotifications} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon style={{ color: grey[100] }} />
             </Badge>
           ))
-        : (notificationIcon = <NotificationsIcon />);
+        : (notificationIcon = (
+            <NotificationsIcon style={{ color: grey[100] }} />
+          ));
     } else {
-      notificationIcon = <NotificationsIcon />;
+      notificationIcon = <NotificationsIcon style={{ color: grey[100] }} />;
     }
 
     let notificationsMarkup =

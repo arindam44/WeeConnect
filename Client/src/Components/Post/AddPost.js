@@ -12,6 +12,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import Picker from "emoji-picker-react";
+import { grey } from "@material-ui/core/colors";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 //ICONS
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -72,8 +74,9 @@ class AddPost extends Component {
     event.preventDefault();
     this.props.addPost({ body: this.state.body });
   };
-  openPicker = () => {
-    this.setState({ emojiOpen: !this.state.emojiOpen });
+  openPicker = (event) => {
+    this.setState({ emojiOpen: true });
+    console.log("openpicker called--", this.state.emojiOpen);
   };
   handleEmojiClick = (event, emojiObject) => {
     console.log(emojiObject.emoji);
@@ -104,7 +107,7 @@ class AddPost extends Component {
       <Fragment>
         <Tooltip title="Create New Post" placement="top">
           <IconButton onClick={this.handleOpen}>
-            <AddIcon />
+            <AddIcon style={{ color: grey[100] }} />
           </IconButton>
         </Tooltip>
         <Dialog
@@ -131,6 +134,7 @@ class AddPost extends Component {
                 variant="outlined"
                 placeholder="Write something..."
                 multiline
+                fullWidth
                 autoFocus="true"
                 error={errors.body ? true : false}
                 helperText={errors.body}
@@ -142,13 +146,17 @@ class AddPost extends Component {
                   classes: {
                     notchedOutline: classes.notchedOutline,
                   },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip title="Emoji" placement="top">
+                        <IconButton onClick={this.openPicker}>
+                          <Emoji />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
                 }}
               />
-              <Tooltip title="Insert Emoji" placement="top">
-                <IconButton onClick={this.openPicker}>
-                  <Emoji />
-                </IconButton>
-              </Tooltip>
               {this.state.emojiOpen && (
                 <div className={classes.emojiPicker}>
                   <Picker

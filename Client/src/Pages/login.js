@@ -20,6 +20,9 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  link: {
+    color: theme.spreadThis.palette.primary.main,
+  },
 });
 
 class login extends Component {
@@ -143,7 +146,10 @@ class login extends Component {
             <br />
 
             <small>
-              Don't have an Account? Sign Up <Link to="/signup">Here</Link>
+              Don't have an Account? Sign Up{" "}
+              <Link to="/signup" className={classes.link}>
+                <b>Here</b>
+              </Link>
             </small>
           </form>
         </Grid>
