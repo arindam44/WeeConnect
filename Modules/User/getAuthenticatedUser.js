@@ -17,7 +17,7 @@ const getAuthenticatedUser = (req, res) => {
       return notification
         .find({ recipient: req.user.userHandle })
         .sort({ createdAt: -1 })
-        .limit(10);
+        .limit(20);
     })
     .then((data) => {
       userdata.notifications = data;

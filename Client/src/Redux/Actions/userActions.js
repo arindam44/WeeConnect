@@ -4,7 +4,10 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   LOADING_USER,
+  LOADING_DATA,
   SET_UNAUTHENTICATED,
+  SET_POSTS,
+  MARK_NOTIFICATIONS_READ,
 } from "../Types";
 import axios from "axios";
 
@@ -128,6 +131,36 @@ export const editUserDetails = (userDetails) => (dispatch) => {
     })
     .then(() => {
       dispatch(getUserData());
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getUser = (userHandle) => (dispatch) => {
+  console.log("from user page-------");
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`, {
+      headers: {
+        Authorization: localStorage.IdToken,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: SET_POSTS, payload: res.data.posts });
+    })
+    .catch((err) => {
+      dispatch({ type: SET_POSTS, payload: null });
+    });
+};
+
+export const markNotificationsRead = (notificationIds) => (dispatch) => {
+  axios
+    .post(`/notifications/`, notificationIds, {
+      headers: {
+        Authorization: localStorage.IdToken,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: MARK_NOTIFICATIONS_READ });
     })
     .catch((err) => console.log(err));
 };

@@ -22,11 +22,16 @@ const styles = {
     display: "flex",
     marginBottom: 20,
     position: "relative",
+    padding: 10,
   },
   image: {
-    minWidth: 200,
+    minWidth: 120,
+    height: 120,
+    padding: "20, 20, 10, 0",
+    borderRadius: "50%",
     objectFit: "cover",
   },
+
   content: {
     padding: 20,
   },
@@ -59,7 +64,7 @@ class PostCard extends Component {
               to={`/user/${post.userHandle}`}
               color="primary"
             >
-              {post.userHandle}
+              @{post.userHandle}
             </Typography>
             {deleteButton}
             <Typography variant="body1">{post.content}</Typography>
@@ -74,7 +79,11 @@ class PostCard extends Component {
               </IconButton>
             </Tooltip>
             <span>{post.commentCount} Comments</span>
-            <PostDialog postId={post._id} userHandle={post.userHandle} />
+            <PostDialog
+              postId={post._id}
+              userHandle={post.userHandle}
+              openDialog={this.props.openDialog}
+            />
           </CardContent>
         </Card>
       </div>
@@ -85,6 +94,7 @@ PostCard.propTypes = {
   user: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

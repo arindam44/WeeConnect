@@ -11,14 +11,26 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Picker from "emoji-picker-react";
 
 //ICONS
 import EditIcon from "@material-ui/icons/Edit";
+import Emoji from "@material-ui/icons/InsertEmoticonSharp";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
   button: {
     float: "right",
+  },
+  textField: {
+    width: "90%",
+  },
+  emojiPicker: {
+    position: "relative",
+    left: "50%",
+    height: "300px",
+    width: "200px",
+    marginBottom: "20px",
   },
 });
 class EditDetails extends Component {
@@ -63,11 +75,21 @@ class EditDetails extends Component {
     this.props.editUserDetails(userDetails);
     this.handleClose();
   };
+  openPicker = () => {
+    this.setState({ emojiOpen: !this.state.emojiOpen });
+  };
+  handleEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject.emoji);
+    this.setState({ body: this.state.body + emojiObject.emoji });
+  };
+  closeEmojiPicker = () => {
+    this.setState({ emojiOpen: false });
+  };
   render() {
     const { classes } = this.props;
     return (
       <Fragment>
-        <Tooltip title="Edit Details" placement="top">
+        <Tooltip title="Edit Profile" placement="top">
           <IconButton onClick={this.handleOpen} className={classes.button}>
             <EditIcon color="primary" />
           </IconButton>
@@ -85,12 +107,26 @@ class EditDetails extends Component {
                 name="bio"
                 type="text"
                 label="Bio"
-                fullWidth
                 placeholder="A short bio about yourself"
                 className={classes.textField}
                 value={this.state.bio}
                 onChange={this.handleChange}
+                onClick={this.closeEmojiPicker}
               />
+              <Tooltip title="Insert Emoji" placement="top">
+                <IconButton onClick={this.openPicker}>
+                  <Emoji />
+                </IconButton>
+              </Tooltip>
+              {this.state.emojiOpen && (
+                <div className={classes.emojiPicker}>
+                  <Picker
+                    disableSkinTonePicker="true"
+                    disableSearchBar="true"
+                    onEmojiClick={this.handleEmojiClick}
+                  />
+                </div>
+              )}
               <br />
               <TextField
                 name="website"

@@ -21,9 +21,6 @@ import Emoji from "@material-ui/icons/InsertEmoticonSharp";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  textField: {
-    width: "90%",
-  },
   notchedOutline: {
     borderColor: "white !important",
   },
@@ -31,6 +28,7 @@ const styles = (theme) => ({
     position: "relative",
     left: "50%",
     height: "300px",
+    width: "200px",
     marginBottom: "20px",
   },
   submitButton: {
@@ -81,7 +79,7 @@ class AddPost extends Component {
     console.log(emojiObject.emoji);
     this.setState({ body: this.state.body + emojiObject.emoji });
   };
-  closeEmojiPicket = () => {
+  closeEmojiPicker = () => {
     this.setState({ emojiOpen: false });
   };
   componentWillReceiveProps(nextProps) {
@@ -139,7 +137,7 @@ class AddPost extends Component {
                 className={classes.textField}
                 onChange={this.handleChange}
                 value={this.state.body}
-                onClick={this.closeEmojiPicket}
+                onClick={this.closeEmojiPicker}
                 InputProps={{
                   classes: {
                     notchedOutline: classes.notchedOutline,

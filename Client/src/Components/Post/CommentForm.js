@@ -19,7 +19,7 @@ const styles = (theme) => ({
     padding: "1px 0px 1px 5px",
   },
   body: {
-    width: 388,
+    width: 395,
   },
   myvisibleSeparator: {
     width: "100%",

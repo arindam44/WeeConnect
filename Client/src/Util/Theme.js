@@ -1,21 +1,21 @@
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#33c9dc",
-      main: "#00bcd4",
-      dark: "#008394",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#ec407a",
-      main: "#e91e63",
-      dark: "#d81b60",
-      contrastText: "#fff",
-    },
-  },
   spreadThis: {
+    palette: {
+      primary: {
+        light: "#33c9dc",
+        main: "#00bcd4",
+        dark: "#008394",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ec407a",
+        main: "#e91e63",
+        dark: "#d81b60",
+        contrastText: "#fff",
+      },
+    },
     logo: {
       maxWidth: 75,
       maxHeight: 75,

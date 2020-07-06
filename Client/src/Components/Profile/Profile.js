@@ -8,6 +8,8 @@ import {
   logoutUser,
   uploadProfileImage,
 } from "../../Redux/Actions/userActions";
+import ProfileSkeleton from "../../Util/ProfileSkeleton";
+
 //MUI
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
@@ -25,7 +27,12 @@ import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
 import LogOutIcon from "@material-ui/icons/PowerSettingsNew";
 
-const styles = (theme) => ({ ...theme.spreadThis });
+const styles = (theme) => ({
+  ...theme.spreadThis,
+  link: {
+    color: theme.spreadThis.palette.primary.main,
+  },
+});
 
 class Profile extends Component {
   constructor(props) {
@@ -53,6 +60,8 @@ class Profile extends Component {
       user: {
         credentials: {
           userHandle,
+          firstName,
+          lastName,
           createdAt,
           imageUrl,
           bio,
@@ -99,11 +108,13 @@ class Profile extends Component {
             <MuiLink
               component={Link}
               to={`user/${userHandle}`}
-              color="primary"
+              color="secondary"
               variant="h5"
             >
               @{userHandle}
             </MuiLink>
+            <hr />
+            <Typography variant="h6">{`${firstName} ${lastName}`}</Typography>
             <hr />
             {bio && <Typography variant="body2">{bio}</Typography>}
             <hr />
@@ -116,8 +127,12 @@ class Profile extends Component {
             {website && (
               <Fragment>
                 <LinkIcon color="primary" />
-                <a href={website} target="_blank" rel="noopener noreferrer">
-                  {" "}
+                <a
+                  href={website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={classes.link}
+                >
                   {website}
                 </a>
                 <hr />
@@ -135,7 +150,7 @@ class Profile extends Component {
         </div>
       </Paper>
     ) : (
-      <p>loading...</p>
+      <ProfileSkeleton />
     );
 
     return profileMarkup;

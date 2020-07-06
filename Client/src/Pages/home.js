@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import PostCard from "../Components/Post/PostCard";
 import Profile from "../Components/Profile/Profile";
 import PropTypes from "prop-types";
+import PostSkeleton from "../Util/PostSkeleton";
 
 export class home extends Component {
   componentWillMount() {
@@ -12,6 +13,7 @@ export class home extends Component {
     if (this.props.authenticated === false) {
       this.props.history.push("/login");
     }
+    this.props.getPosts();
   }
   componentDidMount() {
     this.props.getPosts();
@@ -21,7 +23,7 @@ export class home extends Component {
     let recentPostsMarkUp = !loading ? (
       posts.map((post) => <PostCard key={post._id} post={post} />)
     ) : (
-      <p>Loading...</p>
+      <PostSkeleton />
     );
     return (
       <Grid container spacing={2}>

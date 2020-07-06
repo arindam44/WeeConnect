@@ -10,8 +10,9 @@ import logo from "../../Images/logo.png";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
+  ...theme.spreadThis,
   nav: {
-    color: theme.palette.primary.main,
+    color: theme.spreadThis.palette.primary.main,
   },
 }));
 
