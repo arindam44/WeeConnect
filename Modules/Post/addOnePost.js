@@ -1,6 +1,7 @@
 const post = require("../../Models/posts.model");
+const imageUploadHelper = require("../Func/imageUploadHelper");
 
-const addOnePost = (req, res, next) => {
+const addOnePost = async (req, res, next) => {
   if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Body must not be Empty!" });
   }
@@ -8,6 +9,10 @@ const addOnePost = (req, res, next) => {
   const newPost = new post({
     content: req.body.body,
   });
+  if (req.file) {
+    const imageUrl = await imageUploadHelper(req.file);
+    newPost.imageUrl = imageUrl;
+  }
   newPost.userImage = req.user.imageUrl;
   newPost.likeCount = 0;
   newPost.commentCount = 0;

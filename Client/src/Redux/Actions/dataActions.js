@@ -71,7 +71,6 @@ export const deletePost = (postId) => (dispatch) => {
 
 export const addPost = (newPost) => (dispatch) => {
   dispatch({ type: LOADING_UI });
-  console.log("before axios...." + newPost.body);
   axios
     .post("/post", newPost, {
       headers: {

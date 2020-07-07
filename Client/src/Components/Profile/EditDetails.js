@@ -80,7 +80,7 @@ class EditDetails extends Component {
   };
   handleEmojiClick = (event, emojiObject) => {
     console.log(emojiObject.emoji);
-    this.setState({ body: this.state.body + emojiObject.emoji });
+    this.setState({ bio: this.state.bio + emojiObject.emoji });
   };
   closeEmojiPicker = () => {
     this.setState({ emojiOpen: false });

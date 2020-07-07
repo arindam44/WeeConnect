@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 //REDUX IMPORTS
 import { connect } from "react-redux";
@@ -36,6 +38,7 @@ class signup extends Component {
       firstName: "",
       lastName: "",
       userHandle: "",
+      gender: "",
       password: "",
       confirmPassword: "",
       errors: {},
@@ -136,7 +139,17 @@ class signup extends Component {
               fullWidth
             />
             <br />
-
+            <Select
+              id="gender"
+              name="gender"
+              required
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.gender}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
             <TextField
               id="password"
               name="password"

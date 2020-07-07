@@ -8,6 +8,7 @@ import {
   logoutUser,
   uploadProfileImage,
 } from "../../Redux/Actions/userActions";
+import { addPost } from "../../Redux/Actions/dataActions";
 import ProfileSkeleton from "../../Util/ProfileSkeleton";
 
 //MUI
@@ -20,6 +21,7 @@ import Fab from "@material-ui/core/Fab";
 import Badge from "@material-ui/core/Badge";
 import ToolTip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
+import Dialog from "@material-ui/core/Dialog";
 //Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
@@ -29,21 +31,43 @@ import LogOutIcon from "@material-ui/icons/PowerSettingsNew";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  link: {
-    color: theme.spreadThis.palette.primary.main,
+  imageDialog: {
+    position: "absolute",
+  },
+  fullImage: {
+    position: "relative",
+    maxHeight: 650,
   },
 });
 
 class Profile extends Component {
   constructor(props) {
     super();
+    this.state = {
+      open: false,
+    };
   }
-  handleImageChange = (event) => {
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+  handleImageChange = async (event) => {
     event.preventDefault();
     const image = event.target.files[0];
     const formData = new FormData();
     formData.append("file", image, image.name);
-    this.props.uploadProfileImage(formData);
+    await this.props.uploadProfileImage(formData);
+    const post = new FormData();
+    const gender =
+      this.props.user.credentials.gender === "male" ? "his" : "her";
+    post.append(
+      "body",
+      `${this.props.user.credentials.userHandle} changed ${gender} profile picture`
+    );
+    post.append("file", image, image.name);
+    this.props.addPost(post);
   };
   handleEditImage = () => {
     const fileInput = document.getElementById("imageInput");
@@ -94,7 +118,11 @@ class Profile extends Component {
                 </ToolTip>
               }
             >
-              <Avatar src={imageUrl} className="profile-image" />
+              <Avatar
+                src={imageUrl}
+                className="profile-image"
+                onClick={this.handleOpen}
+              />
               <input
                 type="file"
                 id="imageInput"
@@ -104,42 +132,47 @@ class Profile extends Component {
             </Badge>
           </div>
           <hr />
-          <div className="profile-details">
-            <MuiLink
-              component={Link}
-              to={`user/${userHandle}`}
-              color="secondary"
-              variant="h5"
-            >
+          <div className="profile-names">
+            <MuiLink component={Link} to={`user/${userHandle}`} variant="h5">
               @{userHandle}
             </MuiLink>
             <hr />
+
             <Typography variant="h6">{`${firstName} ${lastName}`}</Typography>
             <hr />
             {bio && <Typography variant="body2">{bio}</Typography>}
             <hr />
-            {location && (
-              <Fragment>
-                <LocationOn color="primary" /> <span>{location}</span>
-                <hr />
-              </Fragment>
-            )}
-            {website && (
-              <Fragment>
-                <LinkIcon color="primary" />
-                <a
-                  href={website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.link}
-                >
-                  {website}
-                </a>
-                <hr />
-              </Fragment>
-            )}
-            <CalendarToday color="primary" />{" "}
-            <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+            <div className="profile-details">
+              {location && (
+                <Fragment>
+                  <LocationOn color="primary" />
+                  <a
+                    href={`http://google.com/maps/place/${location}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {location}
+                  </a>
+                  <hr />
+                </Fragment>
+              )}
+              {website && (
+                <Fragment>
+                  <LinkIcon color="primary" />
+                  <a
+                    href={website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.Link}
+                  >
+                    {website}
+                  </a>
+                  <hr />
+                </Fragment>
+              )}
+              <CalendarToday color="primary" />{" "}
+              <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+            </div>
           </div>
           <ToolTip title="LogOut" placement="top">
             <IconButton onClick={this.handleLogout}>
@@ -147,6 +180,15 @@ class Profile extends Component {
             </IconButton>
           </ToolTip>
           <EditDetails />
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            maxWidth="l"
+            maxHeight={window.innerHeight}
+            className={classes.imageDialog}
+          >
+            <img src={imageUrl} alt="image" className={classes.fullImage} />
+          </Dialog>
         </div>
       </Paper>
     ) : (
@@ -162,13 +204,14 @@ Profile.propTypes = {
   classes: propTypes.object.isRequired,
   logoutUser: propTypes.func.isRequired,
   uploadProfileImage: propTypes.func.isRequired,
+  addPost: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapActionsToProps = { logoutUser, uploadProfileImage };
+const mapActionsToProps = { logoutUser, uploadProfileImage, addPost };
 
 export default connect(
   mapStateToProps,

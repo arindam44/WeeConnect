@@ -20,6 +20,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import CloseIcon from "@material-ui/icons/Close";
 import AddIcon from "@material-ui/icons/Add";
 import Emoji from "@material-ui/icons/InsertEmoticonSharp";
+import PhotoIcon from "@material-ui/icons/InsertPhoto";
+import DoneIcon from "@material-ui/icons/Done";
+import { FormHelperText } from "@material-ui/core";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -33,10 +36,25 @@ const styles = (theme) => ({
     width: "200px",
     marginBottom: "20px",
   },
-  submitButton: {
+  imageIcon: {
+    marginRight: 10,
+  },
+  imagePreview: {
     position: "relative",
-    left: "84%",
+    marginLeft: "20%",
+    marginRight: "20%",
+    maxWidth: "70%",
+    maxHeight: 500,
+    alignSelf: "center",
+  },
+  closeimage: {
+    position: "relative",
+    marginRight: "10px",
+  },
+  submitButton: {
+    display: "flex",
     marginTop: "10px",
+    marginBottom: "15px",
   },
   progressSpinner: {
     position: "absolute",
@@ -54,27 +72,32 @@ class AddPost extends Component {
     body: "",
     errors: {},
     emojiOpen: false,
+    showImageButton: true,
+    imageUrl: null,
+    image: {},
   };
   handleOpen = () => {
     this.setState({ open: true });
   };
   handleClose = () => {
     this.props.clearErrors();
-    this.setState({ open: false, errors: {} });
+    this.setState({ open: false, errors: {}, disableImage: false });
+    this.clearImage();
   };
   handleChange = (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "\n") {
-      this.setState({ [event.target.name]: "<br />" });
-    } else {
-      this.setState({ [event.target.name]: event.target.value });
-    }
+    this.setState({
+      [event.target.name]: event.target.value,
+      emojiOpen: false,
+    });
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addPost({ body: this.state.body });
+    const newPost = new FormData();
+    newPost.append("body", this.state.body);
+    newPost.append("file", this.state.image, this.state.image.name);
+    this.props.addPost(newPost);
   };
-  openPicker = (event) => {
+  openPicker = () => {
     this.setState({ emojiOpen: true });
     console.log("openpicker called--", this.state.emojiOpen);
   };
@@ -82,8 +105,20 @@ class AddPost extends Component {
     console.log(emojiObject.emoji);
     this.setState({ body: this.state.body + emojiObject.emoji });
   };
-  closeEmojiPicker = () => {
+  handleImageChange = (event) => {
+    event.preventDefault();
+    const image = event.target.files[0];
+    const url = URL.createObjectURL(image);
+    console.log(url);
+    this.setState({ imageUrl: url, showImageButton: false, image: image });
+  };
+  addImage = (event) => {
+    event.preventDefault();
+    document.getElementById("addImageInput").click();
     this.setState({ emojiOpen: false });
+  };
+  clearImage = () => {
+    this.setState({ imageUrl: null, showImageButton: true });
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
@@ -98,7 +133,7 @@ class AddPost extends Component {
     }
   }
   render() {
-    const { errors } = this.state;
+    const { errors, showImageButton, imageUrl } = this.state;
     const {
       classes,
       UI: { loading },
@@ -141,7 +176,6 @@ class AddPost extends Component {
                 className={classes.textField}
                 onChange={this.handleChange}
                 value={this.state.body}
-                onClick={this.closeEmojiPicker}
                 InputProps={{
                   classes: {
                     notchedOutline: classes.notchedOutline,
@@ -166,15 +200,47 @@ class AddPost extends Component {
                   />
                 </div>
               )}
+              <input
+                type="file"
+                hidden
+                id="addImageInput"
+                onChange={this.handleImageChange}
+              />
+              {showImageButton && (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.addImage}
+                  className={classes.imageButton}
+                >
+                  <PhotoIcon className={classes.imageIcon} /> Insert Photo
+                </Button>
+              )}
+              {imageUrl && (
+                <div id="image-preview">
+                  <Tooltip
+                    title="Close"
+                    onClick={this.clearImage}
+                    className={classes.closeimage}
+                  >
+                    <CloseIcon />
+                  </Tooltip>
+                  <img
+                    src={imageUrl}
+                    alt="image"
+                    className={classes.imagePreview}
+                  />
+                </div>
+              )}
               <Button
                 type="submit"
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 className={classes.submitButton}
                 disabled={loading}
                 onClick={this.handleSubmit}
               >
-                Submit
+                <DoneIcon className={classes.imageIcon} /> Done
                 {loading && (
                   <CircularProgress
                     size={30}

@@ -9,6 +9,7 @@ import image from "../../Images/no-image.png";
 import Likebutton from "./Likebutton";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
+import NoImage from "../../Images/no-image.png";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -16,6 +17,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
+import Avatar from "@material-ui/core/Avatar";
+import MuiLink from "@material-ui/core/Link";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CloseIcon from "@material-ui/icons/Close";
@@ -35,6 +38,7 @@ const styles = (theme) => ({
     borderRadius: "50%",
     objectFit: "cover",
   },
+
   dialogContent: {
     padding: 20,
   },
@@ -46,6 +50,10 @@ const styles = (theme) => ({
     textAlign: "center",
     marginTop: 50,
     marginBottom: 50,
+  },
+  image: {
+    maxWidth: "80%",
+    maxHeight: "auto",
   },
 });
 
@@ -94,28 +102,29 @@ class PostDialog extends Component {
     ) : (
       post && (
         <Grid container spacing={12}>
-          <Grid item xs={4}>
-            <img
-              src={post.userImage}
-              alt={image}
-              className={classes.profileImage}
-            />
+          <Grid item xs={1}>
+            <Avatar variant="circle" src={post.userImage} alt={NoImage} />
           </Grid>
-          <Grid item xs={8}>
-            <Typography
+          <Grid item xs={11}>
+            <MuiLink
               component={Link}
               color="primary"
               variant="h5"
               to={`/users/${this.props.userHandle}`}
+              className={classes.userHandle}
             >
               @{this.props.userHandle}
-            </Typography>
-            <hr className={classes.invisibleSeparator} />
+            </MuiLink>
+            <br />
             <Typography variant="body2" color="textSecondary">
-              {dayjs(post.createdAt).format("h:mm a, MMMM DD YYYY")}
+              {dayjs(post.createdAt).format("h:mm a, MMMM DD, YYYY")}
             </Typography>
             <hr className={classes.invisibleSeparator} />
             <Typography variant="body1">{post.content}</Typography>
+            {post.imageUrl && (
+              <img src={post.imageUrl} alt="image" className={classes.image} />
+            )}
+            <br />
             <Likebutton postId={post._id} />
             <span>{post.likeCount} Likes</span>
             <Tooltip title="Comments" placement="top">
@@ -142,7 +151,7 @@ class PostDialog extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           fullWidth
-          maxWidth="xs"
+          maxWidth="sm"
         >
           <Tooltip
             title="Close"

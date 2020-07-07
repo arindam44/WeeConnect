@@ -20,6 +20,7 @@ const verifyAuth = (req, res, next) => {
     .then((data) => {
       req.user.userHandle = data.userHandle;
       req.user.imageUrl = data.imageUrl;
+      req.user.gender = data.gender;
       return next();
     })
     .catch((err) => {

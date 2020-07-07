@@ -77,14 +77,18 @@ const theme = createMuiTheme({
         borderRadius: "50%",
         margin: "auto",
       },
-      "& .profile-details": {
+      "& .profile-names": {
         textAlign: "center",
         "& span, svg": {
           verticalAlign: "middle",
         },
         "& a": {
-          color: "#00bcd4",
+          color: "#762ffa",
         },
+      },
+      "& .profile-details": {
+        textAlign: "left",
+        marginLeft: "20%",
       },
       "& hr": {
         border: "none",

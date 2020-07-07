@@ -1,50 +1,49 @@
-
 const isEmail = (email) => {
-    const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(email.match(regEx)) return true;
-    else return false;
+  const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email.match(regEx)) return true;
+  else return false;
 };
 
-
-const isEmpty =(string) => {
-    if(string.trim() === "") return true;
-    else return false;
-}
+const isEmpty = (string) => {
+  if (string.trim() === "") return true;
+  else return false;
+};
 
 const validateLoginData = (data) => {
   let errors = {};
-  
-  if (isEmpty(data.email)) errors.email = 'Must not be empty';
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
-  if (!isEmail(data.email)) errors.email = 'Must be a valid Email Id';
-  
+
+  if (isEmpty(data.email)) errors.email = "Must not be empty";
+  if (isEmpty(data.password)) errors.password = "Must not be empty";
+  if (!isEmail(data.email)) errors.email = "Must be a valid Email Id";
+
   return {
     errors,
-    valid: Object.keys(errors).length === 0 ? true : false
+    valid: Object.keys(errors).length === 0 ? true : false,
   };
 };
 
 const validateSignupData = (data) => {
   let errors = {};
-  
+
   if (isEmpty(data.email)) {
-    errors.email = 'Must not be empty';
+    errors.email = "Must not be empty";
   } else if (!isEmail(data.email)) {
-    errors.email = 'Must be a valid Email Id';
+    errors.email = "Must be a valid Email Id";
   }
-  if (isEmpty(data.password)) errors.password = 'Must not be empty';
-  if (isEmpty(data.firstName)) errors.firstName = 'Must not be empty';
-  if (isEmpty(data.lastName)) errors.lastName = 'Must not be empty';
-  if (isEmpty(data.userHandle)) errors.userHandle = 'Must not be empty';
-  
+  if (isEmpty(data.password)) errors.password = "Must not be empty";
+  if (isEmpty(data.firstName)) errors.firstName = "Must not be empty";
+  if (isEmpty(data.lastName)) errors.lastName = "Must not be empty";
+  if (isEmpty(data.userHandle)) errors.userHandle = "Must not be empty";
+  if (isEmpty(data.gender)) errors.gender = "Must not be empty";
+
   if (data.password !== data.confirmPassword) {
-    errors.confirmPassword = 'Password did not match';
+    errors.confirmPassword = "Password did not match";
   }
 
   return {
     errors,
-    valid: Object.keys(errors).length === 0 ? true : false
+    valid: Object.keys(errors).length === 0 ? true : false,
   };
 };
 
-module.exports = { isEmail, isEmpty, validateLoginData ,validateSignupData};
+module.exports = { isEmail, isEmpty, validateLoginData, validateSignupData };

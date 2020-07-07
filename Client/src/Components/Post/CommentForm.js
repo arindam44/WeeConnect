@@ -15,11 +15,13 @@ import SendIcon from "@material-ui/icons/Send";
 const styles = (theme) => ({
   ...theme.spreadThis,
   paper: {
+    position: "absolute",
     width: 500,
     padding: "1px 0px 1px 5px",
   },
   body: {
-    width: 395,
+    position: "relative",
+    width: 543,
   },
   myvisibleSeparator: {
     width: "100%",

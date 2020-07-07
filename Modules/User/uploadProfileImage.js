@@ -1,12 +1,13 @@
-const profileImageUploadHelper = require("../Func/profileImageUploadHelper");
+const imageUploadHelper = require("../Func/imageUploadHelper");
 const user = require("../../Models/users.model");
 const post = require("../../Models/posts.model");
 
 const uploadProfileImage = async (req, res, next) => {
   try {
+    console.log("reached");
     const file = req.file;
-    const imageUrl = await profileImageUploadHelper(file);
-    //console.log(imageUrl);
+    const imageUrl = await imageUploadHelper(file);
+    console.log("profile image ", imageUrl);
     user
       .updateOne(
         { userHandle: req.user.userHandle },
