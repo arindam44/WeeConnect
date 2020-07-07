@@ -5,8 +5,8 @@ const isEmail = (email) => {
 };
 
 const isEmpty = (string) => {
-  if (string.trim() === "") return true;
-  else return false;
+  if (string && string.trim() !== "") return false;
+  else return true;
 };
 
 const validateLoginData = (data) => {
