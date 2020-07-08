@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import NoImage from "../../Images/no-image.png";
+
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -31,14 +34,10 @@ class Comments extends Component {
             <Fragment key={createdAt}>
               <Grid item sm={12}>
                 <Grid container>
-                  <Grid item sm={2}>
-                    <img
-                      src={userImage}
-                      alt="Image"
-                      className={classes.commentImage}
-                    />
+                  <Grid item sm={1} xs={2}>
+                    <Avatar variant="circle" src={userImage} alt={NoImage} />
                   </Grid>
-                  <Grid item sm={9}>
+                  <Grid item sm={11} xs={10}>
                     <div className={classes.commentData}>
                       <Typography
                         variant="h6"

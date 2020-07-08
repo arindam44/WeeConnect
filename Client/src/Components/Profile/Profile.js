@@ -28,9 +28,13 @@ import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
 import LogOutIcon from "@material-ui/icons/PowerSettingsNew";
+import YoutubeIcon from "@material-ui/icons/YouTube";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
+  paper: {
+    padding: 10,
+  },
   imageDialog: {
     position: "absolute",
   },
@@ -78,6 +82,9 @@ class Profile extends Component {
     this.props.logoutUser();
     this.props.history.push("/login");
   };
+  toUpperCase = (text) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
   render() {
     const {
       classes,
@@ -90,6 +97,7 @@ class Profile extends Component {
           imageUrl,
           bio,
           website,
+          youtube,
           location,
         },
         loading,
@@ -150,8 +158,9 @@ class Profile extends Component {
                     href={`http://google.com/maps/place/${location}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ marginLeft: 10 }}
                   >
-                    {location}
+                    <span>{this.toUpperCase(location)}</span>
                   </a>
                   <hr />
                 </Fragment>
@@ -159,19 +168,39 @@ class Profile extends Component {
               {website && (
                 <Fragment>
                   <LinkIcon color="primary" />
-                  <a
-                    href={website}
+                  <Typography
+                    variant="body1"
+                    component={Link}
+                    to={website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={classes.Link}
+                    style={{ marginLeft: 10 }}
                   >
-                    {website}
-                  </a>
+                    {website.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")}
+                  </Typography>
                   <hr />
                 </Fragment>
               )}
-              <CalendarToday color="primary" />{" "}
-              <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+              {youtube && (
+                <Fragment>
+                  <YoutubeIcon color="primary" />
+                  <Typography
+                    variant="body1"
+                    component={Link}
+                    to={website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginLeft: 10 }}
+                  >
+                    {youtube.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")}
+                  </Typography>
+                  <hr />
+                </Fragment>
+              )}
+              <CalendarToday color="primary" />
+              <span style={{ marginLeft: 10 }}>
+                Joined {dayjs(createdAt).format("MMM YYYY")}
+              </span>
             </div>
           </div>
           <ToolTip title="LogOut" placement="top">

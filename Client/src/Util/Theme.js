@@ -85,11 +85,12 @@ const theme = createMuiTheme({
         },
         "& a": {
           color: "#762ffa",
+          maxWidth: "50px",
         },
       },
       "& .profile-details": {
         textAlign: "left",
-        marginLeft: "20%",
+        marginLeft: "15%",
       },
       "& hr": {
         border: "none",

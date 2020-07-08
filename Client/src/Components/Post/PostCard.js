@@ -5,6 +5,7 @@ import DeletePost from "./DeletePost";
 import PostDialog from "./PostDialog";
 import LikeButton from "./Likebutton";
 import NoImage from "../../Images/no-image.png";
+import Linkify from "react-linkify";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -86,10 +87,10 @@ class PostCard extends Component {
       <div>
         <Card className={classes.card}>
           <Grid container spacing={12}>
-            <Grid item xs={1}>
+            <Grid item xs={2} sm={1}>
               <Avatar variant="circle" src={post.userImage} alt={NoImage} />
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={10} sm={11}>
               {deleteButton}
               <Typography
                 variant="h6"
@@ -104,7 +105,11 @@ class PostCard extends Component {
                 {dayjs(post.createdAt).fromNow()}
               </Typography>
               <hr className={classes.invisibleSeparator} />
-              <Typography variant="body1">{post.content}</Typography>
+              <Typography variant="body1">
+                <Linkify properties={{ target: "_blank" }}>
+                  {post.content}
+                </Linkify>
+              </Typography>
               {post.imageUrl && (
                 <img
                   src={post.imageUrl}

@@ -49,6 +49,9 @@ const userSchema = new Schema({
   website: {
     type: String,
   },
+  youtube: {
+    type: String,
+  },
   location: {
     type: String,
   },

@@ -97,6 +97,7 @@ class AddPost extends Component {
     if (this.state.image) {
       newPost.append("file", this.state.image, this.state.image.name);
     }
+
     this.props.addPost(newPost);
   };
   openPicker = () => {
@@ -120,7 +121,7 @@ class AddPost extends Component {
     this.setState({ emojiOpen: false });
   };
   clearImage = () => {
-    this.setState({ imageUrl: null, showImageButton: true });
+    this.setState({ imageUrl: null, showImageButton: true, image: null });
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {

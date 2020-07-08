@@ -12,10 +12,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Picker from "emoji-picker-react";
-
+import InputAdornnment from "@material-ui/core/InputAdornment";
 //ICONS
 import EditIcon from "@material-ui/icons/Edit";
 import Emoji from "@material-ui/icons/InsertEmoticonSharp";
+import LocationOn from "@material-ui/icons/LocationOn";
+import LinkIcon from "@material-ui/icons/Link";
+import YoutubeIcon from "@material-ui/icons/YouTube";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -38,6 +41,7 @@ class EditDetails extends Component {
     bio: "",
     website: "",
     location: "",
+    youtube: "",
     open: false,
   };
 
@@ -107,6 +111,7 @@ class EditDetails extends Component {
                 name="bio"
                 type="text"
                 label="Bio"
+                multiline
                 placeholder="A short bio about yourself"
                 className={classes.textField}
                 value={this.state.bio}
@@ -129,25 +134,65 @@ class EditDetails extends Component {
               )}
               <br />
               <TextField
+                name="location"
+                type="text"
+                label="Location"
+                placeholder="Your location"
+                className={classes.textField}
+                value={this.state.location}
+                onChange={this.handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornnment position="start">
+                      <Tooltip title="Emoji" placement="top">
+                        <IconButton onClick={this.openPicker}>
+                          <LocationOn color="primary" />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornnment>
+                  ),
+                }}
+              />
+              <TextField
                 name="website"
                 type="text"
                 label="Website"
-                rows="3"
                 placeholder="Your personal/professional website"
                 className={classes.textField}
                 value={this.state.website}
                 onChange={this.handleChange}
                 style={{ marginRight: "20px" }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornnment position="start">
+                      <Tooltip title="Emoji" placement="top">
+                        <IconButton onClick={this.openPicker}>
+                          <LinkIcon color="primary" />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornnment>
+                  ),
+                }}
               />
               <TextField
-                name="location"
+                name="youtube"
                 type="text"
-                label="Location"
-                rows="3"
+                label="YouTube"
                 placeholder="Your location"
                 className={classes.textField}
-                value={this.state.location}
+                value={this.state.youtube}
                 onChange={this.handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornnment position="start">
+                      <Tooltip title="Emoji" placement="top">
+                        <IconButton onClick={this.openPicker}>
+                          <YoutubeIcon color="primary" />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornnment>
+                  ),
+                }}
               />
             </form>
           </DialogContent>
