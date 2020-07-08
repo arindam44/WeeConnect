@@ -9,6 +9,7 @@ import Likebutton from "./Likebutton";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 import NoImage from "../../Images/no-image.png";
+import Linkify from "react-linkify";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -119,7 +120,9 @@ class PostDialog extends Component {
               {dayjs(post.createdAt).format("h:mm a, MMMM DD, YYYY")}
             </Typography>
             <hr className={classes.invisibleSeparator} />
-            <Typography variant="body1">{post.content}</Typography>
+            <Typography variant="body1">
+              <Linkify>{post.content}</Linkify>
+            </Typography>
             {post.imageUrl && (
               <img src={post.imageUrl} alt="image" className={classes.image} />
             )}
