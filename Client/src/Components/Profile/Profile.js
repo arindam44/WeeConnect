@@ -141,7 +141,12 @@ class Profile extends Component {
           </div>
           <hr />
           <div className="profile-names">
-            <MuiLink component={Link} to={`user/${userHandle}`} variant="h5">
+            <MuiLink
+              component={Link}
+              to={`user/${userHandle}`}
+              variant="h5"
+              color="primary"
+            >
               @{userHandle}
             </MuiLink>
             <hr />
@@ -158,7 +163,7 @@ class Profile extends Component {
                     href={`http://google.com/maps/place/${location}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginLeft: 10 }}
+                    style={{ marginLeft: 10, color: "primary" }}
                   >
                     <span>{this.toUpperCase(location)}</span>
                   </a>

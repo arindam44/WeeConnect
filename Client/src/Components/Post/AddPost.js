@@ -101,7 +101,7 @@ class AddPost extends Component {
     this.props.addPost(newPost);
   };
   openPicker = () => {
-    this.setState({ emojiOpen: true });
+    this.setState({ emojiOpen: !this.state.emojiOpen });
     console.log("openpicker called--", this.state.emojiOpen);
   };
   handleEmojiClick = (event, emojiObject) => {

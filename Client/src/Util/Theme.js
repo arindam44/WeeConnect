@@ -39,6 +39,9 @@ const theme = createMuiTheme({
       marginTop: 20,
       position: "relative",
     },
+    a: {
+      color: "#762ffa",
+    },
     customError: {
       color: "red",
       fontSize: "0.8rem",
