@@ -80,7 +80,8 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
       saveIdTokenInLocalStorage(res.data.token);
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      history.push("/");
+      alert("Signed Up Successfully.");
+      history.push("/);
     })
     .catch((err) => {
       dispatch({

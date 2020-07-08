@@ -65,6 +65,7 @@ class signup extends Component {
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       userHandle: this.state.userHandle,
+      gender: this.state.gender,
     };
     this.props.signupUser(newUserdata, this.props.history);
   };
@@ -131,7 +132,7 @@ class signup extends Component {
               id="userHandle"
               name="userHandle"
               type="text"
-              label="Handle"
+              label="Username"
               className={classes.textField}
               onChange={this.handleChange}
               helperText={errors.userHandle}
@@ -142,10 +143,14 @@ class signup extends Component {
             <Select
               id="gender"
               name="gender"
+              label="Gender"
               required
               fullWidth
+              className={classes.textField}
               onChange={this.handleChange}
               value={this.state.gender}
+              helperText={errors.gender}
+              error={errors.gender ? true : false}
             >
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>

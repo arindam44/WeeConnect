@@ -4,6 +4,7 @@ const { validateSignupData } = require("../Func/validateEmail");
 
 const signUp = (req, res) => {
   const newUser = new user(req.body);
+  console.log(newUser);
   const verifyuser = {
     email: req.body.email,
     password: req.body.password,
@@ -40,13 +41,11 @@ const signUp = (req, res) => {
               newUser
                 .save()
                 .then(() => {
-                  res
-                    .status(201)
-                    .json({
-                      message:
-                        "User " + data.user.uid + " signed up successfully!",
-                      token: token,
-                    });
+                  res.status(201).json({
+                    message:
+                      "User " + data.user.uid + " signed up successfully!",
+                    token: token,
+                  });
                 })
                 .catch((err) => {
                   console.error(err);
