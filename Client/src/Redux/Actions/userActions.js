@@ -75,10 +75,10 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
     .post("/signUp", newUserdata)
-    .then((res) => {
+    .then(async (res) => {
       //setAuthorizationHeader(res.data.token);
       saveIdTokenInLocalStorage(res.data.token);
-      dispatch(getUserData());
+      await dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
       alert("Signed Up Successfully.");
       history.push("/");

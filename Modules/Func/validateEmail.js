@@ -1,9 +1,21 @@
+const emailExistence = require("email-existence");
+
 const isEmail = (email) => {
   const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (email.match(regEx)) return true;
   else return false;
 };
-
+const verifyEmail = (email) => {
+  emailExistence.check(email, (error, response) => {
+    if (response) {
+      console.log(response);
+      return true;
+    } else {
+      console.log(response);
+      return false;
+    }
+  });
+};
 const isEmpty = (string) => {
   if (string && string.trim() !== "") return false;
   else return true;
@@ -27,7 +39,7 @@ const validateSignupData = (data) => {
 
   if (isEmpty(data.email)) {
     errors.email = "Must not be empty";
-  } else if (!isEmail(data.email)) {
+  } else if (!isEmail(data.email) && !verifyEmail(data.email)) {
     errors.email = "Must be a valid Email Id";
   }
   if (isEmpty(data.password)) errors.password = "Must not be empty";

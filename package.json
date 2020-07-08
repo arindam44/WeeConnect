@@ -21,6 +21,7 @@
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "email-existence": "^0.1.6",
     "emoji-picker-react": "^3.2.1",
     "express": "^4.17.1",
     "firebase": "^7.14.5",

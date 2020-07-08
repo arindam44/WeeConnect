@@ -9,8 +9,7 @@ import PostSkeleton from "../Util/PostSkeleton";
 
 export class home extends Component {
   componentWillMount() {
-    console.log("AUTH------------", this.props.authenticated);
-    if (this.props.authenticated === false) {
+    if (!localStorage.IdToken) {
       this.props.history.push("/login");
     }
     this.props.getPosts();
@@ -27,11 +26,11 @@ export class home extends Component {
     );
     return (
       <Grid container spacing={2}>
-        <Grid item sm={8} xs={12}>
-          {recentPostsMarkUp}
-        </Grid>
         <Grid item sm={4} xs={12}>
           <Profile history={this.props.history} />
+        </Grid>
+        <Grid item sm={8} xs={12}>
+          {recentPostsMarkUp}
         </Grid>
       </Grid>
     );
