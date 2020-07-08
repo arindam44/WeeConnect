@@ -81,7 +81,7 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
       alert("Signed Up Successfully.");
-      history.push("/);
+      history.push("/");
     })
     .catch((err) => {
       dispatch({
