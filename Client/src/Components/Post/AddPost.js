@@ -74,7 +74,7 @@ class AddPost extends Component {
     emojiOpen: false,
     showImageButton: true,
     imageUrl: null,
-    image: {},
+    image: null,
   };
   handleOpen = () => {
     this.setState({ open: true });
@@ -94,7 +94,9 @@ class AddPost extends Component {
     event.preventDefault();
     const newPost = new FormData();
     newPost.append("body", this.state.body);
-    newPost.append("file", this.state.image, this.state.image.name);
+    if (this.state.image) {
+      newPost.append("file", this.state.image, this.state.image.name);
+    }
     this.props.addPost(newPost);
   };
   openPicker = () => {

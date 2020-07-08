@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 
 //REDUX IMPORTS
 import { connect } from "react-redux";
@@ -84,12 +85,11 @@ class signup extends Component {
     const { errors } = this.state;
     return (
       <Grid container className={classes.form}>
-        <Grid item sm />
-        <Grid item sm>
+        <Grid item sm={4} xs={1} />
+        <Grid item sm={4} xs={10}>
           <img className={classes.logo} src={logo} alt="WeConnect" />
           <Typography variant="h2" className={classes.pageTitle}>
-            {" "}
-            Signup{" "}
+            Signup
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
@@ -140,10 +140,13 @@ class signup extends Component {
               fullWidth
             />
             <br />
+            <InputLabel shrink id="gender-label">
+              Gender
+            </InputLabel>
             <Select
               id="gender"
               name="gender"
-              label="Gender"
+              labelId="gender-label"
               required
               fullWidth
               className={classes.textField}
@@ -207,7 +210,7 @@ class signup extends Component {
             </small>
           </form>
         </Grid>
-        <Grid item sm />
+        <Grid item sm={4} xs={1} />
       </Grid>
     );
   }

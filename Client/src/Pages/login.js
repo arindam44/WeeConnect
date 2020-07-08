@@ -71,8 +71,8 @@ class login extends Component {
     const { errors } = this.state;
     return (
       <Grid container className={classes.form}>
-        <Grid item sm />
-        <Grid item sm>
+        <Grid item sm={4} xs={1} />
+        <Grid item sm={4} xs={10}>
           <img className={classes.logo} src={logo} alt="WeConnect" />
           <Typography variant="h2" className={classes.pageTitle}>
             Login
@@ -153,7 +153,7 @@ class login extends Component {
             </small>
           </form>
         </Grid>
-        <Grid item sm />
+        <Grid item sm={4} xs={1} />
       </Grid>
     );
   }
