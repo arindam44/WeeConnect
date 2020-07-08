@@ -140,9 +140,7 @@ class signup extends Component {
               fullWidth
             />
             <br />
-            <InputLabel shrink id="gender-label">
-              Gender
-            </InputLabel>
+            <InputLabel id="gender-label">Gender</InputLabel>
             <Select
               id="gender"
               name="gender"

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import DeletePost from "./DeletePost";
 import PostDialog from "./PostDialog";
 import LikeButton from "./Likebutton";
+import NoImage from "../../Images/no-image.png";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
@@ -16,6 +17,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
 
 import ChatIcon from "@material-ui/icons/Chat";
 
@@ -35,20 +38,25 @@ const styles = (theme) => ({
     objectFit: "cover",
   },
   content: {
-    padding: 20,
+    padding: 10,
   },
   image: {
     maxWidth: "90%",
     maxHeight: "300px",
-    marginLeft: "10px",
     objectFit: "cover",
+    cursor: "pointer",
   },
   imageDialog: {
     position: "absolute",
   },
   fullImage: {
     position: "relative",
-    maxHeight: 650,
+    maxHeight: 600,
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 50,
+    right: 20,
   },
 });
 
@@ -77,50 +85,50 @@ class PostCard extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardMedia
-            className={classes.userImage}
-            image={post.userImage}
-            title="Profile Image"
-          />
-          <CardContent className={classes.content}>
-            {deleteButton}
-            <Typography
-              variant="h6"
-              component={Link}
-              to={`/user/${post.userHandle}`}
-              color="primary"
-            >
-              @{post.userHandle}
-            </Typography>
-            <br />
-            <Typography variant="caption" color="textSecondary">
-              {dayjs(post.createdAt).fromNow()}
-            </Typography>
-            <hr className={classes.invisibleSeparator} />
-            <Typography variant="body1">{post.content}</Typography>
-            {post.imageUrl && (
-              <img
-                src={post.imageUrl}
-                alt="image"
-                className={classes.image}
-                onClick={this.handleImageOpen}
+          <Grid container spacing={12}>
+            <Grid item xs={1}>
+              <Avatar variant="circle" src={post.userImage} alt={NoImage} />
+            </Grid>
+            <Grid item xs={11}>
+              {deleteButton}
+              <Typography
+                variant="h6"
+                component={Link}
+                to={`/user/${post.userHandle}`}
+                color="primary"
+              >
+                @{post.userHandle}
+              </Typography>
+              <br />
+              <Typography variant="body2" color="textSecondary">
+                {dayjs(post.createdAt).fromNow()}
+              </Typography>
+              <hr className={classes.invisibleSeparator} />
+              <Typography variant="body1">{post.content}</Typography>
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt="image"
+                  className={classes.image}
+                  onClick={this.handleImageOpen}
+                />
+              )}
+              <br />
+              <LikeButton postId={post._id} />
+              <span>{post.likeCount} Likes</span>
+              <Tooltip title="Comments" placement="top">
+                <IconButton>
+                  <ChatIcon color="primary" />
+                </IconButton>
+              </Tooltip>
+              <span>{post.commentCount} Comments</span>
+              <PostDialog
+                postId={post._id}
+                userHandle={post.userHandle}
+                openDialog={this.props.openDialog}
               />
-            )}
-            <br />
-            <LikeButton postId={post._id} />
-            <span>{post.likeCount} Likes</span>
-            <Tooltip title="Comments" placement="top">
-              <IconButton>
-                <ChatIcon color="primary" />
-              </IconButton>
-            </Tooltip>
-            <span>{post.commentCount} Comments</span>
-            <PostDialog
-              postId={post._id}
-              userHandle={post.userHandle}
-              openDialog={this.props.openDialog}
-            />
-          </CardContent>
+            </Grid>
+          </Grid>
         </Card>
         <Dialog
           open={this.state.open}

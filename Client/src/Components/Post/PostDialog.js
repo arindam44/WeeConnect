@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { getPost, clearErrors } from "../../Redux/Actions/dataActions";
-import image from "../../Images/no-image.png";
 import Likebutton from "./Likebutton";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";

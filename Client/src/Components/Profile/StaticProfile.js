@@ -3,7 +3,6 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import ProfileImageDialog from "./ProfileImageDialog";
 
 //MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -26,7 +25,7 @@ const styles = (theme) => ({
   },
   fullImage: {
     position: "relative",
-    maxHeight: 650,
+    maxHeight: 600,
   },
 });
 

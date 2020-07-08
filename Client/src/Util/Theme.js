@@ -76,6 +76,7 @@ const theme = createMuiTheme({
         maxWidth: "100%",
         borderRadius: "50%",
         margin: "auto",
+        cursor: "pointer",
       },
       "& .profile-names": {
         textAlign: "center",

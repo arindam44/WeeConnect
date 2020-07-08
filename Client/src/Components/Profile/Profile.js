@@ -36,7 +36,7 @@ const styles = (theme) => ({
   },
   fullImage: {
     position: "relative",
-    maxHeight: 650,
+    maxHeight: 600,
   },
 });
 
@@ -187,7 +187,7 @@ class Profile extends Component {
             maxHeight={window.innerHeight}
             className={classes.imageDialog}
           >
-            <img src={imageUrl} alt="image" className={classes.fullImage} />
+            <img src={imageUrl} className={classes.fullImage} />
           </Dialog>
         </div>
       </Paper>
