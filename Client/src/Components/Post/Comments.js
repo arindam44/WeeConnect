@@ -11,12 +11,6 @@ import Avatar from "@material-ui/core/Avatar";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  commentImage: {
-    width: 75,
-    height: 75,
-    objectFit: "cover",
-    borderRadius: "50%",
-  },
   commentData: {
     marginLeft: 20,
   },
@@ -45,7 +39,7 @@ class Comments extends Component {
                         to={`user/${userHandle}`}
                         color="primary"
                       >
-                        {userHandle}
+                        @{userHandle}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
                         {dayjs(createdAt).fromNow()}

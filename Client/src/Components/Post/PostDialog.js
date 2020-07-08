@@ -100,11 +100,11 @@ class PostDialog extends Component {
       </div>
     ) : (
       post && (
-        <Grid container spacing={12}>
-          <Grid item xs={1}>
+        <Grid container>
+          <Grid item xs={2} sm={1}>
             <Avatar variant="circle" src={post.userImage} alt={NoImage} />
           </Grid>
-          <Grid item xs={11}>
+          <Grid item xs={10} sm={11}>
             <MuiLink
               component={Link}
               color="primary"

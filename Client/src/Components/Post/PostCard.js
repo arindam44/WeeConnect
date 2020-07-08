@@ -54,11 +54,6 @@ const styles = (theme) => ({
     position: "relative",
     maxHeight: 600,
   },
-  deleteButton: {
-    position: "absolute",
-    top: 50,
-    right: 20,
-  },
 });
 
 class PostCard extends Component {
@@ -80,18 +75,15 @@ class PostCard extends Component {
       },
     } = this.props;
     const deleteButton =
-      userHandle === post.userHandle ? (
-        <DeletePost postId={post._id} className={classes.deleteButton} />
-      ) : null;
+      userHandle === post.userHandle ? <DeletePost postId={post._id} /> : null;
     return (
       <div>
         <Card className={classes.card}>
-          <Grid container spacing={12}>
+          <Grid container>
             <Grid item xs={2} sm={1}>
               <Avatar variant="circle" src={post.userImage} alt={NoImage} />
             </Grid>
-            <Grid item xs={10} sm={11}>
-              {deleteButton}
+            <Grid item xs={9} sm={10}>
               <Typography
                 variant="h6"
                 component={Link}
@@ -132,6 +124,9 @@ class PostCard extends Component {
                 userHandle={post.userHandle}
                 openDialog={this.props.openDialog}
               />
+            </Grid>
+            <Grid item xs={2} sm={1}>
+              {deleteButton}
             </Grid>
           </Grid>
         </Card>
