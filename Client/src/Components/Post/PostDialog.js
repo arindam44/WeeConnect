@@ -29,7 +29,7 @@ const styles = (theme) => ({
   ...theme.spreadThis,
   closeButton: {
     position: "absolute",
-    left: "90%",
+    right: "5%",
     top: "3.5%",
   },
   profileImage: {
@@ -93,8 +93,6 @@ class PostDialog extends Component {
       comments,
       UI: { loading },
     } = this.props;
-    console.log(post);
-    console.log(comments);
     const dialogMarkup = loading ? (
       <div className={classes.spinnerDiv}>
         <CircularProgress size={100} thickness={2} />
@@ -121,7 +119,7 @@ class PostDialog extends Component {
             </Typography>
             <hr className={classes.invisibleSeparator} />
             <Typography variant="body1">
-              <Linkify>{post.content}</Linkify>
+              <Linkify className={classes.link}>{post.content}</Linkify>
             </Typography>
             {post.imageUrl && (
               <img src={post.imageUrl} alt="image" className={classes.image} />

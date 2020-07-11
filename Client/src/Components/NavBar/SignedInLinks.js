@@ -15,7 +15,7 @@ const showNotifications = () => {};
 export default function SignedInLinks() {
   return (
     <div>
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="space-around">
         <AddPost />
         <Link to="/">
           <Tooltip title="Home" placement="top">

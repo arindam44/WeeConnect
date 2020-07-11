@@ -18,9 +18,6 @@ import { signupUser } from "../Redux/Actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  link: {
-    color: theme.spreadThis.palette.primary.main,
-  },
   firstNameField: {
     width: "49%",
     marginRight: "1%",
@@ -140,11 +137,11 @@ class signup extends Component {
               fullWidth
             />
             <br />
-            <InputLabel id="gender-label">Gender</InputLabel>
+
             <Select
               id="gender"
               name="gender"
-              labelId="gender-label"
+              label="Gender"
               required
               fullWidth
               className={classes.textField}

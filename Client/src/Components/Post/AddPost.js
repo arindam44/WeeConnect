@@ -55,6 +55,7 @@ const styles = (theme) => ({
     display: "flex",
     marginTop: "10px",
     marginBottom: "15px",
+    borderRadius: "15px",
   },
   progressSpinner: {
     position: "absolute",
@@ -111,9 +112,11 @@ class AddPost extends Component {
   handleImageChange = (event) => {
     event.preventDefault();
     const image = event.target.files[0];
-    const url = URL.createObjectURL(image);
-    console.log(url);
-    this.setState({ imageUrl: url, showImageButton: false, image: image });
+    var url = null;
+    if (image) {
+      url = URL.createObjectURL(image);
+      this.setState({ imageUrl: url, showImageButton: false, image: image });
+    }
   };
   addImage = (event) => {
     event.preventDefault();
@@ -214,7 +217,7 @@ class AddPost extends Component {
                   variant="outlined"
                   color="primary"
                   onClick={this.addImage}
-                  className={classes.imageButton}
+                  className={classes.button}
                 >
                   <PhotoIcon className={classes.imageIcon} /> Insert Photo
                 </Button>

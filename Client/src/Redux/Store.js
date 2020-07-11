@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import userReducer from "./Reducers/userReducer";
 import dataReducer from "./Reducers/dataReducer";
 import uiReducer from "./Reducers/uiReducer";
+import chatReducer from "./Reducers/chatReducer";
 
 const initialState = {};
 
@@ -12,13 +13,14 @@ const reducers = combineReducers({
   user: userReducer,
   data: dataReducer,
   UI: uiReducer,
+  chat: chatReducer,
 });
 const store = createStore(
   reducers,
   initialState,
   compose(
-    applyMiddleware(...middleware)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(...middleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

@@ -20,9 +20,6 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  link: {
-    color: theme.spreadThis.palette.primary.main,
-  },
 });
 
 class login extends Component {
@@ -141,7 +138,9 @@ class login extends Component {
               onClick={this.handleSubmit}
             >
               LOGIN
-              {loading && <CircularProgress className={classes.progress} />}
+              {loading && (
+                <CircularProgress className={classes.progress} size={30} />
+              )}
             </Button>
             <br />
 

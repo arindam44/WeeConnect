@@ -23,15 +23,17 @@ const Navbar = (props) => {
       <AppBar>
         <Toolbar className="nav-container">
           <Grid container spacing={2}>
-            <Grid xs={1} sm={1} item>
+            <Grid xs={2} sm={3} item>
               <Link to="/">
                 <Avatar variant="rounded" src={logo} alt="WeConnect" />
               </Link>
             </Grid>
-            <Grid xs={10} sm={10} item alignContent="center" justify="center">
-              {authenticated ? <SignedInLinks /> : <SignedOutLinks />}
+            <Grid xs={8} sm={6} item alignContent="center" justify="center">
+              {authenticated ? <SignedInLinks /> : null}
             </Grid>
-            <Grid item xs={1} sm={1} />
+            <Grid item xs={2} sm={3}>
+              {authenticated ? null : <SignedOutLinks />}
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

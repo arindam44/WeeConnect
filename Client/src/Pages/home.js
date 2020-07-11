@@ -6,6 +6,7 @@ import PostCard from "../Components/Post/PostCard";
 import Profile from "../Components/Profile/Profile";
 import PropTypes from "prop-types";
 import PostSkeleton from "../Util/PostSkeleton";
+import UserList from "../Components/UserList";
 
 export class home extends Component {
   componentWillMount() {
@@ -25,14 +26,19 @@ export class home extends Component {
       <PostSkeleton />
     );
     return (
-      <Grid container spacing={2}>
-        <Grid item sm={4} xs={12}>
-          <Profile history={this.props.history} />
+      <div class="container">
+        <Grid container spacing={2}>
+          <Grid item sm={3} xs={12}>
+            <Profile history={this.props.history} />
+          </Grid>
+          <Grid item sm={7} xs={12}>
+            {recentPostsMarkUp}
+          </Grid>
+          <Grid item sm={2}>
+            <UserList />
+          </Grid>
         </Grid>
-        <Grid item sm={8} xs={12}>
-          {recentPostsMarkUp}
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 }

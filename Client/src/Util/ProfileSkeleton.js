@@ -53,17 +53,19 @@ const ProfileSkeleton = (props) => {
           <img src={NoImage} alt="Profile" className="profile-image" />
         </div>
         <hr className={classes.invisibleSeparator} />
-        <div class="profile-details">
+        <div class="profile-names">
           <div className={classes.userHandle} />
           <hr className={classes.invisibleSeparator} />
           <div className={classes.fullLine} />
           <div className={classes.fullLine} />
           <hr className={classes.invisibleSeparator} />
-          <LocationOn color="primary" /> <span>Location</span>
-          <hr className={classes.invisibleSeparator} />
-          <LinkIcon color="primary" /> <span>Website</span>
-          <hr className={classes.invisibleSeparator} />
-          <CalendarToday color="primary" /> <span>Joined Date</span>
+          <div class="profile-details">
+            <LocationOn color="primary" /> <span>Location</span>
+            <hr className={classes.invisibleSeparator} />
+            <LinkIcon color="primary" /> <span>Website</span>
+            <hr className={classes.invisibleSeparator} />
+            <CalendarToday color="primary" /> <span>Joined Date</span>
+          </div>
         </div>
       </div>
     </Paper>

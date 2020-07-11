@@ -35,12 +35,10 @@ const styles = (theme) => ({
   paper: {
     padding: 10,
   },
-  imageDialog: {
-    position: "absolute",
-  },
+  imageDialog: {},
   fullImage: {
-    position: "relative",
-    maxHeight: 600,
+    maxWidth: "100%",
+    height: "auto",
   },
 });
 
@@ -145,7 +143,7 @@ class Profile extends Component {
               component={Link}
               to={`user/${userHandle}`}
               variant="h5"
-              color="primary"
+              className={classes.link}
             >
               @{userHandle}
             </MuiLink>
@@ -163,7 +161,8 @@ class Profile extends Component {
                     href={`http://google.com/maps/place/${location}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ marginLeft: 10, color: "primary" }}
+                    style={{ marginLeft: 10 }}
+                    className={classes.link}
                   >
                     <span>{this.toUpperCase(location)}</span>
                   </a>
@@ -180,6 +179,7 @@ class Profile extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ marginLeft: 10 }}
+                    className={classes.link}
                   >
                     {website.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")}
                   </Typography>
@@ -196,6 +196,7 @@ class Profile extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ marginLeft: 10 }}
+                    className={classes.link}
                   >
                     {youtube.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")}
                   </Typography>
@@ -217,8 +218,6 @@ class Profile extends Component {
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
-            maxWidth="l"
-            maxHeight={window.innerHeight}
             className={classes.imageDialog}
           >
             <img src={imageUrl} className={classes.fullImage} />

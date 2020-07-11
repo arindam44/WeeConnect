@@ -21,6 +21,7 @@ const deleteNotificationOnUnlike = require("./Modules/Notification/deleteNotific
 const getAuthenticatedUser = require("./Modules/User/getAuthenticatedUser");
 const getUserDetails = require("./Modules/User/getUserDetails");
 const markNotificationsRead = require("./Modules/Notification/markNotificationsRead");
+const getAllUserNames = require("./Modules/User/getAllUserNames");
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -32,6 +33,17 @@ const multerMid = multer({
 require("dotenv").config();
 
 const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+//Socket
+io.on("connection", (sock) => {
+  console.log("new connection", sock.handshake.query);
+  sock.on("join", ({ from, to }) => {
+    sock.join(id);
+  });
+});
+
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
@@ -56,7 +68,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //Start Server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on port ${port}!!!`);
 });
 
@@ -74,6 +86,7 @@ app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post("/image", verifyAuth, uploadProfileImage);
 app.post("/user", verifyAuth, addUserDetails);
+app.get("/users", verifyAuth, getAllUserNames);
 app.get("/user", verifyAuth, getAuthenticatedUser);
 app.get("/user/:userHandle", getUserDetails);
 app.post("/notifications", verifyAuth, markNotificationsRead);

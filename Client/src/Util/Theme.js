@@ -23,6 +23,9 @@ const theme = createMuiTheme({
     typography: {
       useNextVariants: true,
     },
+    link: {
+      color: "#762ffa",
+    },
     form: {
       textAlign: "center",
     },
@@ -37,7 +40,11 @@ const theme = createMuiTheme({
     },
     button: {
       marginTop: 20,
+      width: "30%",
       position: "relative",
+      borderRadius: "15px",
+      textAlign: "center",
+      padding: "7px",
     },
     a: {
       color: "#762ffa",
@@ -49,6 +56,8 @@ const theme = createMuiTheme({
     },
     progress: {
       position: "absolute",
+      marginTop: "5px",
+      marginBottom: "5px",
     },
     invisibleSeparator: {
       border: "none",
@@ -93,7 +102,8 @@ const theme = createMuiTheme({
       },
       "& .profile-details": {
         textAlign: "left",
-        marginLeft: "15%",
+        marginLeft: "10%",
+        overflow: "hidden",
       },
       "& hr": {
         border: "none",

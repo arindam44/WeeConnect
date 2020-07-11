@@ -61,7 +61,6 @@ export const getUserData = (history) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((user) => {
-      console.log(`after /user `, user);
       dispatch({
         type: SET_USER,
         payload: user,
