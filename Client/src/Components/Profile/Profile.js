@@ -66,7 +66,7 @@ class Profile extends Component {
       this.props.user.credentials.gender === "male" ? "his" : "her";
     post.append(
       "body",
-      `${this.props.user.credentials.userHandle} changed ${gender} profile picture`
+      `@${this.props.user.credentials.userHandle} changed ${gender} profile picture`
     );
     post.append("file", image, image.name);
     this.props.addPost(post);

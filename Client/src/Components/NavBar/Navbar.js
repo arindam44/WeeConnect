@@ -3,29 +3,34 @@ import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Avatar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import withStyles from "@material-ui/styles/withStyles";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import logo from "../../Images/logo.png";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   ...theme.spreadThis,
-  nav: {
+  navContainer: {
     color: theme.spreadThis.palette.primary.main,
   },
-}));
+});
 
 const Navbar = (props) => {
-  const { authenticated } = props;
+  const { authenticated, classes } = props;
   return (
     <div>
       <AppBar>
-        <Toolbar className="nav-container">
+        <Toolbar className={classes.navContainer}>
           <Grid container spacing={2}>
             <Grid xs={2} sm={3} item>
               <Link to="/">
-                <Avatar variant="rounded" src={logo} alt="WeConnect" />
+                <Avatar
+                  variant="rounded"
+                  src={logo}
+                  alt="WeConnect"
+                  className={classes.avatar}
+                />
               </Link>
             </Grid>
             <Grid xs={8} sm={6} item alignContent="center" justify="center">
@@ -43,10 +48,11 @@ const Navbar = (props) => {
 
 Navbar.propTypes = {
   authenticated: propTypes.bool.isRequired,
+  classes: propTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(withStyles(styles)(Navbar));

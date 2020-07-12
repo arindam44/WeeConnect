@@ -55,6 +55,9 @@ const styles = (theme) => ({
     maxWidth: "80%",
     maxHeight: "auto",
   },
+  container: {
+    position: "relative",
+  },
 });
 
 class PostDialog extends Component {
@@ -99,7 +102,7 @@ class PostDialog extends Component {
       </div>
     ) : (
       post && (
-        <Grid container>
+        <Grid container className={classes.container}>
           <Grid item xs={2} sm={1}>
             <Avatar variant="circle" src={post.userImage} alt={NoImage} />
           </Grid>

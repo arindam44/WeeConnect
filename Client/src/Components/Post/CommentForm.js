@@ -14,19 +14,14 @@ import SendIcon from "@material-ui/icons/Send";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  paper: {
-    position: "absolute",
-    width: 500,
-    padding: "1px 0px 1px 5px",
-  },
   body: {
     position: "relative",
-    width: 543,
+    width: "100%",
   },
   myvisibleSeparator: {
     width: "100%",
     borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: 10,
+    marginBottom: "10px",
   },
 });
 
@@ -56,14 +51,13 @@ class CommentForm extends Component {
     const { errors, body } = this.state;
     console.log(errors);
     return (
-      <Fragment>
+      <>
         <hr className={classes.myvisibleSeparator} />
-        <form onSubmit={this.handleSend}>
+        <form onSubmit={this.handleSend} className={classes.body}>
           <TextField
             variant="outlined"
             name="body"
             fullWidth
-            className={classes.body}
             onChange={this.handleChange}
             placeholder="Write a comment"
             value={body}
@@ -83,7 +77,7 @@ class CommentForm extends Component {
           />
         </form>
         <hr className={classes.visibleSeparator} />
-      </Fragment>
+      </>
     );
   }
 }

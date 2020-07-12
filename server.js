@@ -22,6 +22,7 @@ const getAuthenticatedUser = require("./Modules/User/getAuthenticatedUser");
 const getUserDetails = require("./Modules/User/getUserDetails");
 const markNotificationsRead = require("./Modules/Notification/markNotificationsRead");
 const getAllUserNames = require("./Modules/User/getAllUserNames");
+const onUserImageChange = require("./Modules/Func/onUserImageChange");
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -95,3 +96,4 @@ app.post("/notifications", verifyAuth, markNotificationsRead);
 likeNotification();
 commentNotification();
 deleteNotificationOnUnlike();
+onUserImageChange();

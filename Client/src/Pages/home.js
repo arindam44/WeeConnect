@@ -28,15 +28,15 @@ export class home extends Component {
     return (
       <div class="container">
         <Grid container spacing={2}>
-          <Grid item sm={3} xs={12}>
+          <Grid item sm={4} xs={12}>
             <Profile history={this.props.history} />
           </Grid>
-          <Grid item sm={7} xs={12}>
+          <Grid item sm={8} xs={12}>
             {recentPostsMarkUp}
           </Grid>
-          <Grid item sm={2}>
+          {/* <Grid item sm={2}>
             <UserList />
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     );
