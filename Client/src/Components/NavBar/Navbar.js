@@ -8,6 +8,7 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import logo from "../../Images/logo.png";
 import Grid from "@material-ui/core/Grid";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -20,6 +21,7 @@ const Navbar = (props) => {
   const { authenticated, classes } = props;
   return (
     <div>
+      <CssBaseline />
       <AppBar>
         <Toolbar className={classes.navContainer}>
           <Grid container spacing={2}>

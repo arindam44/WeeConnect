@@ -19,3 +19,8 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
 
 export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
+export const SET_THREADS = "SET_THREADS";
+export const SET_CHAT = "SET_CHAT";
+export const SEND_MESSEGE = "SEND_MESSEGE";
+export const NEW_MESSEGE = "NEW_MESSEGE";
+export const UPDATE_THREADS = "UPDATE_THREADS";

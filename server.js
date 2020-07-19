@@ -23,6 +23,7 @@ const getUserDetails = require("./Modules/User/getUserDetails");
 const markNotificationsRead = require("./Modules/Notification/markNotificationsRead");
 const getAllUserNames = require("./Modules/User/getAllUserNames");
 const onUserImageChange = require("./Modules/Func/onUserImageChange");
+const { saveChat, findThreads } = require("./Modules/Chat");
 
 const multerMid = multer({
   storage: multer.memoryStorage(),
@@ -38,10 +39,41 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 //Socket
+let sockets = {};
+let users = [];
 io.on("connection", (sock) => {
-  console.log("new connection", sock.handshake.query);
-  sock.on("join", ({ from, to }) => {
-    sock.join(id);
+  sock.on("join", (data) => {
+    sock.handle = data.userHandle;
+    sockets[sock.handle] = sock;
+    let flag = 0;
+    users.map((user) => {
+      if (user.id == data.id) {
+        flag = 1;
+      }
+    });
+    if (flag == 0) {
+      users.push(data);
+      console.log(users);
+    }
+    io.emit("online_users", users);
+  });
+  sock.on("logout", (userHandle) => {
+    delete sockets[userHandle];
+    let index = users.indexOf(userHandle);
+    users.splice(index, 1);
+    io.emit("online_users", users);
+  });
+  sock.on("send_messege", ({ reciever, sender, body, time }) => {
+    console.log("send messege---", reciever, sender, body, time);
+    if (sockets[reciever] !== undefined) {
+      io.to(
+        sockets[reciever].emit("new_messege", {
+          sender: sender,
+          body: body,
+          time: time,
+        })
+      );
+    }
   });
 });
 
@@ -91,6 +123,10 @@ app.get("/users", verifyAuth, getAllUserNames);
 app.get("/user", verifyAuth, getAuthenticatedUser);
 app.get("/user/:userHandle", getUserDetails);
 app.post("/notifications", verifyAuth, markNotificationsRead);
+
+//Chat Routes
+app.get("/threads", verifyAuth, findThreads);
+app.post("/threads", verifyAuth, saveChat);
 
 //Notification
 likeNotification();

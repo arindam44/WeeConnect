@@ -77,7 +77,7 @@ class Profile extends Component {
   };
 
   handleLogout = () => {
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.user.userHandle);
     this.props.history.push("/login");
   };
   toUpperCase = (text) => {

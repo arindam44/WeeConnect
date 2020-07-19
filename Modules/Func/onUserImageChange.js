@@ -3,7 +3,6 @@ const comment = require("../../Models/comments.model");
 const post = require("../../Models/posts.model");
 
 const onUserImageChange = () => {
-  console.log("image change");
   user.watch().on("change", (data) => {
     if (data.operationType == "update") {
       console.log(data.updateDescription.updatedFields.imageUrl);

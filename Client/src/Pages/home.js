@@ -6,9 +6,15 @@ import PostCard from "../Components/Post/PostCard";
 import Profile from "../Components/Profile/Profile";
 import PropTypes from "prop-types";
 import PostSkeleton from "../Util/PostSkeleton";
-import UserList from "../Components/UserList";
+import NavigationPanel from "../Components/NavBar/NavigationPanel";
+import UsersPanel from "../Components/Chat/UsersPanel";
 
 export class home extends Component {
+  state = {
+    openDialog: false,
+    show: true,
+  };
+
   componentWillMount() {
     if (!localStorage.IdToken) {
       this.props.history.push("/login");
@@ -17,7 +23,12 @@ export class home extends Component {
   }
   componentDidMount() {
     this.props.getPosts();
+    if (window.screen.availWidth < 400) this.setState({ show: false });
   }
+  openNewPostDialog = () => {
+    console.log("open dialog");
+    this.setState({ openDialog: true });
+  };
   render() {
     const { posts, loading } = this.props.data;
     let recentPostsMarkUp = !loading ? (
@@ -28,21 +39,21 @@ export class home extends Component {
     return (
       <div class="container">
         <Grid container spacing={2}>
-          <Grid item sm={4} xs={12}>
-            <Profile history={this.props.history} />
+          <Grid item sm={3} xs={12}>
+            {this.state.show && <NavigationPanel />}
           </Grid>
-          <Grid item sm={8} xs={12}>
+          <Grid item sm={7} xs={12}>
             {recentPostsMarkUp}
           </Grid>
-          {/* <Grid item sm={2}>
-            <UserList />
-          </Grid> */}
+          <Grid item sm={2}>
+            {this.state.show && <UsersPanel />}
+          </Grid>
         </Grid>
       </div>
     );
   }
 }
-
+//<Profile history={this.props.history} />
 home.propTypes = {
   getPosts: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,

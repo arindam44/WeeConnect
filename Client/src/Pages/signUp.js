@@ -73,7 +73,11 @@ class signup extends Component {
       [event.target.name]: event.target.value,
     });
   };
-
+  handleUsernameChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value.toLowerCase(),
+    });
+  };
   render() {
     const {
       classes,
@@ -131,10 +135,15 @@ class signup extends Component {
               type="text"
               label="Username"
               className={classes.textField}
-              onChange={this.handleChange}
-              helperText={errors.userHandle}
+              onChange={this.handleUsernameChange}
+              helperText={
+                errors.userHandle
+                  ? errors.userHandle
+                  : "only lowercase characters, 0-9 & special chars"
+              }
               error={errors.userHandle ? true : false}
               fullWidth
+              value={this.state.userHandle}
             />
             <br />
 

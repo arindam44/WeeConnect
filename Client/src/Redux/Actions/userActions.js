@@ -10,6 +10,7 @@ import {
   MARK_NOTIFICATIONS_READ,
 } from "../Types";
 import axios from "axios";
+import { socket } from "../../Util/Socket";
 
 export const loginUser = (userdata, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -40,11 +41,6 @@ const setAuthorizationHeader = (token) => {
  
 };
 
-const defaultOptions =(token)=> ({
-  headers:{
-    'Authorization':  `Bearer ${token}`
-  }
-});
 */
 
 const saveIdTokenInLocalStorage = (token) => {
@@ -64,6 +60,11 @@ export const getUserData = (history) => (dispatch) => {
       dispatch({
         type: SET_USER,
         payload: user,
+      });
+      socket.emit("join", {
+        id: user.credentials._id,
+        userHandle: user.credentials.userHandle,
+        imageUrl: user.credentials.imageUrl,
       });
       history.push("/");
     })
@@ -90,10 +91,11 @@ export const signupUser = (newUserdata, history) => (dispatch) => {
     });
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = (userHandle) => (dispatch) => {
   localStorage.removeItem("IdToken");
   // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
+  socket.emit("logout", userHandle);
 };
 
 export const uploadProfileImage = (formdata) => (dispatch) => {

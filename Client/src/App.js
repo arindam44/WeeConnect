@@ -13,6 +13,7 @@ import signUp from "./Pages/signUp";
 import Navbar from "./Components/NavBar/Navbar";
 import jwtDecode from "jwt-decode";
 import user from "./Pages/user";
+import chat from "./Pages/Chat";
 import AuthRoute from "./Util/AuthRoute";
 
 const token = localStorage.getItem("IdToken");
@@ -41,6 +42,7 @@ function App() {
                 <Route exact path="/login" component={login} />
                 <Route exact path="/signup" component={signUp} />
                 <Route exact path="/user/:userHandle" component={user} />
+                <Route exact path="/chat" component={chat} />
                 <Route
                   exact
                   path="/user/:userHandle/post/:postId"

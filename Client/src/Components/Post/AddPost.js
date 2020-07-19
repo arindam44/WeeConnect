@@ -147,7 +147,7 @@ class AddPost extends Component {
     return (
       <Fragment>
         <Tooltip title="Create New Post" placement="top">
-          <IconButton onClick={this.handleOpen}>
+          <IconButton hidden onClick={this.handleOpen}>
             <AddIcon style={{ color: grey[100] }} />
           </IconButton>
         </Tooltip>
