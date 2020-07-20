@@ -68,9 +68,11 @@ class ThreadList extends Component {
             <>
               <ListItem
                 className={classes.listItem}
-                onClick={() =>
-                  store.dispatch({ type: SET_CHAT, payload: thread })
-                }
+                onClick={() => {
+                  store.dispatch({ type: SET_CHAT, payload: thread });
+                  if (this.props.mobile === true)
+                    this.props.history.push("/m.chat");
+                }}
               >
                 <ListItemAvatar>
                   <Avatar src={thread.imageUrls[0].url} />
@@ -116,6 +118,22 @@ class ThreadList extends Component {
         >
           Chats
         </Typography>
+        {this.props.mobile && (
+          <Typography
+            variant="body1"
+            style={{
+              position: "absolute",
+              right: 10,
+              top: 65,
+              marginLeft: 20,
+              fontFamily: "Cooper Black",
+            }}
+            color="primary"
+            onClick={() => this.props.history.push("/m.contacts")}
+          >
+            Contacts
+          </Typography>
+        )}
         <List className={classes.list}>{threadsMarkup}</List>
       </>
     );

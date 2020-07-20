@@ -77,7 +77,7 @@ class Chats extends Component {
     const chatsMarkup =
       Object.keys(thread).length !== 0 ? (
         <>
-          <div style={{ maxWidth: "100%", height: "510px" }}>
+          <div style={{ maxWidth: "100%", height: window.innerHeight }}>
             <TitleBar
               style={{ width: "98%" }}
               leftIcons={[

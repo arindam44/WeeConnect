@@ -4,6 +4,7 @@ import { getUser } from "../Redux/Actions/userActions";
 import PropTypes from "prop-types";
 import axios from "axios";
 import PostCard from "../Components/Post/PostCard";
+import Profile from "../Components/Profile/Profile";
 import StaticProfile from "../Components/Profile/StaticProfile";
 import PostSkeleton from "../Util/PostSkeleton";
 import ProfileSkeleton from "../Util/ProfileSkeleton";
@@ -39,6 +40,17 @@ class user extends Component {
   render() {
     const { posts, loading } = this.props.data;
     const { postIdParam } = this.state;
+
+    const profileMarkup =
+      this.state.profile === null ? (
+        <ProfileSkeleton />
+      ) : this.state.profile.userHandle ===
+        this.props.user.credentials.userHandle ? (
+        <Profile />
+      ) : (
+        <StaticProfile profile={this.state.profile} />
+      );
+
     const postsMarkUp = loading ? (
       <PostSkeleton />
     ) : posts === null ? (
@@ -55,11 +67,7 @@ class user extends Component {
     return (
       <Grid container spacing={2}>
         <Grid item sm={4} xs={12}>
-          {this.state.profile === null ? (
-            <ProfileSkeleton />
-          ) : (
-            <StaticProfile profile={this.state.profile} />
-          )}
+          {profileMarkup}
         </Grid>
         <Grid item sm={8} xs={12}>
           {postsMarkUp}
@@ -72,10 +80,12 @@ class user extends Component {
 user.propTypes = {
   getUser: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.data,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, { getUser })(user);

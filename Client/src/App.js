@@ -14,6 +14,9 @@ import Navbar from "./Components/NavBar/Navbar";
 import jwtDecode from "jwt-decode";
 import user from "./Pages/user";
 import chat from "./Pages/Chat";
+import Chats from "./Components/Chat/Chats";
+import ThreadList from "./Components/Chat/ThreadList";
+import UsersPanel from "./Components/Chat/UsersPanel";
 import AuthRoute from "./Util/AuthRoute";
 
 const token = localStorage.getItem("IdToken");
@@ -43,6 +46,9 @@ function App() {
                 <Route exact path="/signup" component={signUp} />
                 <Route exact path="/user/:userHandle" component={user} />
                 <Route exact path="/chat" component={chat} />
+                <Route exact path="/m.threads" component={ThreadList} />
+                <Route exact path="/m.chat" component={Chats} />
+                <Route exact path="/m.contacts" component={UsersPanel} />
                 <Route
                   exact
                   path="/user/:userHandle/post/:postId"
