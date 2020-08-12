@@ -1,4 +1,5 @@
 import {
+  SET_USERS,
   SET_ONLINE_USERS,
   SET_THREADS,
   SET_CHAT,
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   users: [],
+  onlineUsers: [],
   threads: [],
   thread: {},
   chat: [],
@@ -16,13 +18,26 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case SET_ONLINE_USERS:
+    case SET_USERS:
       return {
         ...state,
         users: action.payload,
       };
+    case SET_ONLINE_USERS:
+      action.payload.map((onlineUser) => {
+        const index = state.users.findIndex(
+          (user) => user.userHandle === onlineUser.userHandle
+        );
+        console.log(index);
+        if (index) {
+          state.users.splice(index, 1);
+        }
+      });
+      return {
+        ...state,
+        onlineUsers: action.payload,
+      };
     case SET_THREADS:
-      console.log(action.payload);
       return {
         ...state,
         threads: action.payload,
@@ -30,7 +45,15 @@ export default function (state = initialState, action) {
     case SET_CHAT:
       state.thread.users = action.payload.users;
       state.thread.imageUrls = action.payload.imageUrls;
-      state.chat = action.payload.chats;
+      //state.chat = action.payload.chats;
+      state.threads.map((thread) => {
+        if (thread.users[0] === action.payload.users[0]) {
+          console.log(thread.chats);
+          state.chat = thread.chats;
+        } else {
+          state.chat = [];
+        }
+      });
       return {
         ...state,
       };

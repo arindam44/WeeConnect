@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { logoutUser } from "../../Redux/Actions/userActions";
 
 import List from "@material-ui/core/List";
@@ -15,6 +16,7 @@ import ChatIcon from "@material-ui/icons/ForumRounded";
 import LogoutIcon from "@material-ui/icons/PowerSettingsNew";
 
 function NavigationPanel(props) {
+  const history = useHistory();
   const { user } = props;
   return (
     <div>
@@ -46,7 +48,12 @@ function NavigationPanel(props) {
           </ListItemText>
         </ListItem>
 
-        <ListItem onClick={() => props.logoutUser(user.userHandle)}>
+        <ListItem
+          onClick={() => {
+            props.logoutUser(user.userHandle);
+            history.push("/login");
+          }}
+        >
           <ListItemAvatar>
             <LogoutIcon color="secondary" />
           </ListItemAvatar>

@@ -77,9 +77,8 @@ class Chats extends Component {
     const chatsMarkup =
       Object.keys(thread).length !== 0 ? (
         <>
-          <div style={{ maxWidth: "100%", height: window.innerHeight }}>
+          <div style={{ maxWidth: "100%", height: 500, minHeight: "100%" }}>
             <TitleBar
-              style={{ width: "98%" }}
               leftIcons={[
                 <Avatar
                   src={thread.imageUrls[0].url}

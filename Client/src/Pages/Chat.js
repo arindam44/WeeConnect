@@ -7,8 +7,6 @@ import Grid from "@material-ui/core/Grid";
 
 function Chat(props) {
   const [mobile, setMobile] = useState(false);
-  const [openChat, setOpenChat] = useState(false);
-  const [openContacts, setOpenContacts] = useState(false);
   useEffect(() => {
     if (window.screen.width < 400) setMobile(true);
   }, []);

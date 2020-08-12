@@ -96,6 +96,7 @@ export const logoutUser = (userHandle) => (dispatch) => {
   // delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
   socket.emit("logout", userHandle);
+
 };
 
 export const uploadProfileImage = (formdata) => (dispatch) => {

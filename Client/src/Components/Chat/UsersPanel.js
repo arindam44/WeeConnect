@@ -1,22 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import store from "../../Redux/Store";
 import { socket } from "../../Util/Socket";
 import { SET_ONLINE_USERS } from "../../Redux/Types";
-import { createChat } from "../../Redux/Actions/chatActions";
+import { createChat, getAllUsers } from "../../Redux/Actions/chatActions";
+import UserCard from "./UserCard";
 
 import withStyles from "@material-ui/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/MenuItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Badge from "@material-ui/core/Badge";
 
-import green from "@material-ui/core/colors/green";
 import { grey } from "@material-ui/core/colors";
 
 const styles = (theme) => ({
@@ -26,9 +21,6 @@ const styles = (theme) => ({
     height: "630px",
     overflow: "auto",
   },
-  listItem: {
-    cursor: "pointer",
-  },
 });
 
 socket.on("online_users", (userList) => {
@@ -37,7 +29,10 @@ socket.on("online_users", (userList) => {
 });
 
 const UsersPanel = (props) => {
-  const { users, currentUser, classes } = props;
+  useEffect(() => {
+    props.getAllUsers();
+  }, []);
+  const { users, onlineUsers, currentUser, classes } = props;
 
   console.log(users);
   return (
@@ -53,32 +48,14 @@ const UsersPanel = (props) => {
         Contacts
       </Typography>
       <List component="nav">
+        {onlineUsers.map((user) => {
+          if (user.userHandle !== currentUser.userHandle) {
+            return <UserCard user={user} online={true} />;
+          }
+        })}
         {users.map((user) => {
           if (user.userHandle !== currentUser.userHandle) {
-            console.log(user);
-            return (
-              <ListItem
-                className={classes.listItem}
-                onClick={() => {
-                  props.createChat(user.userHandle, user.imageUrl);
-                }}
-              >
-                <ListItemAvatar>
-                  <Badge
-                    variant="dot"
-                    color={green[100]}
-                    overlap="circle"
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                  >
-                    <Avatar src={user.imageUrl} />
-                  </Badge>
-                </ListItemAvatar>
-                <ListItemText>@{user.userHandle}</ListItemText>
-              </ListItem>
-            );
+            return <UserCard user={user} />;
           }
         })}
       </List>
@@ -87,14 +64,17 @@ const UsersPanel = (props) => {
 };
 UsersPanel.propTypes = {
   users: PropTypes.array.isRequired,
+  onlineUsers: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
   createChat: PropTypes.func.isRequired,
+  getAllUsers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   users: state.chat.users,
+  onlineUsers: state.chat.onlineUsers,
   currentUser: state.user.credentials,
 });
-export default connect(mapStateToProps, { createChat })(
+export default connect(mapStateToProps, { createChat, getAllUsers })(
   withStyles(styles)(UsersPanel)
 );

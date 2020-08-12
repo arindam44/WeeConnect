@@ -4,14 +4,27 @@ import {
   SET_CHAT,
   SEND_MESSEGE,
   UPDATE_THREADS,
+  SET_USERS,
 } from "../Types";
 import { socket } from "../../Util/Socket";
 import store from "../Store";
 
 import axios from "axios";
 
+export const getAllUsers = () => (dispatch) => {
+  axios
+    .get("/users", {
+      headers: {
+        Authorization: localStorage.IdToken,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: SET_USERS, payload: res.data });
+    })
+    .catch((err) => console.log(err));
+};
+
 window.setInterval(() => {
-  console.log("called");
   axios
     .get("/threads", {
       headers: {
@@ -19,7 +32,6 @@ window.setInterval(() => {
       },
     })
     .then((res) => {
-      console.log(res);
       store.dispatch({ type: SET_THREADS, payload: res.data });
     })
     .catch((err) => console.log(err));

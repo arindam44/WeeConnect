@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import propTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
@@ -9,9 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import Modal from "@material-ui/core/Modal";
 import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
 
 //Icons
 import LocationOn from "@material-ui/icons/LocationOn";

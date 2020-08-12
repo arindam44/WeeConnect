@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getPosts } from "../Redux/Actions/dataActions";
 import Grid from "@material-ui/core/Grid";
 import PostCard from "../Components/Post/PostCard";
-import Profile from "../Components/Profile/Profile";
 import PropTypes from "prop-types";
 import PostSkeleton from "../Util/PostSkeleton";
 import NavigationPanel from "../Components/NavBar/NavigationPanel";

@@ -43,12 +43,7 @@ const styles = (theme) => ({
 });
 
 const SignedInLinks = (props) => {
-  const { user, window, classes } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const { user } = props;
 
   return (
     <div>
