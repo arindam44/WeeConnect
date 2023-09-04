@@ -5,7 +5,6 @@ const notification = require('../../Models/notifications.model');
 const commentNotification = () => {
     comment.watch().on('change', data => {
         if(data.operationType == 'insert') {
-            console.log(data.fullDocument);
             post.findById(data.fullDocument.postId)
                 .then( postdata => {
                     if(postdata != null && postdata.userHandle !== data.fullDocument.userHandle) {
@@ -21,11 +20,8 @@ const commentNotification = () => {
                     }
                 })
                 .then(() => {
-                    return;
                 })
                 .catch(err => {
-                    console.error(err);
-                    return;
                 })
         }
     })

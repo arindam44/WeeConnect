@@ -2,7 +2,6 @@ const like = require("../../Models/likes.model");
 const post = require("../../Models/posts.model");
 
 const likePost = (req, res, next) => {
-  console.log("reached likepost");
   post
     .findById(req.params.postId)
     .then((postdata) => {

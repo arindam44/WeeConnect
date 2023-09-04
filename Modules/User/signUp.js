@@ -4,7 +4,6 @@ const { validateSignupData } = require("../Func/validateEmail");
 
 const signUp = (req, res) => {
   const newUser = new user(req.body);
-  console.log(newUser);
   const verifyuser = {
     email: req.body.email,
     password: req.body.password,
@@ -19,14 +18,12 @@ const signUp = (req, res) => {
   const { valid, errors } = validateSignupData(verifyuser);
 
   if (!valid) return res.status(400).json(errors);
-  console.log(errors);
 
   const noImage = `no-image.png`;
   newUser.imageUrl = `https://firebasestorage.googleapis.com/v0/b/weconnect-7a79a.appspot.com/o/${noImage}?alt=media`;
 
   user.exists({ userHandle: newUser.userHandle }, (err, result) => {
     if (!result) {
-      console.log("Handle Does not exist!");
       firebase
         .auth()
         .createUserWithEmailAndPassword(newUser.email, newUser.password)
@@ -62,7 +59,6 @@ const signUp = (req, res) => {
             .json({ general: "Something Went Wrong. Please try again" });
         });
     } else {
-      console.log(`This handle is already taken`);
       res.status(400).json({ userHandle: `This handle is already taken` });
     }
   });

@@ -5,7 +5,6 @@ const addOnePost = async (req, res, next) => {
   if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Body must not be Empty!" });
   }
-  console.log(req.body.body);
   const newPost = new post({
     content: req.body.body,
   });
@@ -18,7 +17,6 @@ const addOnePost = async (req, res, next) => {
   newPost.commentCount = 0;
   newPost.userHandle = req.user.userHandle;
   newPost.userId = req.user.user_id;
-  console.log(newPost);
 
   newPost
     .save()

@@ -4,24 +4,20 @@ const post = require("../../Models/posts.model");
 
 const uploadProfileImage = async (req, res, next) => {
   try {
-    console.log("reached");
     const file = req.file;
     const imageUrl = await imageUploadHelper(file);
-    console.log("profile image ", imageUrl);
     user
       .updateOne(
         { userHandle: req.user.userHandle },
         { $set: { imageUrl: imageUrl } }
       )
       .then(() => {
-        console.log("user success");
         post
           .updateMany(
             { userHandle: req.user.userHandle },
             { $set: { userImage: imageUrl } }
           )
           .then(() => {
-            console.log("post success");
             return res.json({ messege: "Image uploaded successfully!" });
           });
       })

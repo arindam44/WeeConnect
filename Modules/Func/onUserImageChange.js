@@ -5,7 +5,6 @@ const post = require("../../Models/posts.model");
 const onUserImageChange = () => {
   user.watch().on("change", (data) => {
     if (data.operationType == "update") {
-      console.log(data.updateDescription.updatedFields.imageUrl);
       if (data.updateDescription.updatedFields.imageUrl != null) {
         user.findById(data.documentKey).then((userdata) => {
           if (userdata != null) {
@@ -19,7 +18,6 @@ const onUserImageChange = () => {
                 }
               )
               .then(() => {
-                console.log("post images updated");
               });
             comment
               .updateMany(
@@ -31,7 +29,6 @@ const onUserImageChange = () => {
                 }
               )
               .then(() => {
-                console.log("comment images updated");
               });
           }
         });

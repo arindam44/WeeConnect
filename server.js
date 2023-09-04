@@ -46,14 +46,13 @@ io.on("connection", (sock) => {
     sock.handle = data.userHandle;
     sockets[sock.handle] = sock;
     let flag = 0;
-    users.map((user) => {
+    users.forEach((user) => {
       if (user.id == data.id) {
         flag = 1;
       }
     });
     if (flag == 0) {
       users.push(data);
-      console.log(users);
     }
     io.emit("online_users", users);
   });
@@ -64,7 +63,6 @@ io.on("connection", (sock) => {
     io.emit("online_users", users);
   });
   sock.on("send_messege", ({ reciever, sender, body, time }) => {
-    console.log("send messege---", reciever, sender, body, time);
     if (sockets[reciever] !== undefined) {
       io.to(
         sockets[reciever].emit("new_messege", {
@@ -86,19 +84,19 @@ const uri =
   process.env.MONGODB_URL ||
   "mongodb+srv://Admin:Admin1@cluster0-umgvh.mongodb.net/test?retryWrites=true&w=majority";
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true,  useFindAndModify: false, useCreateIndex: true });
 const connection = mongoose.connection;
 connection.once("open", () => {
   console.log(`MongoDB connected!!!`);
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Client/build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "Client/build")));
 
-  app.get("/page/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "Client/build/index.html"));
-  });
-}
+//   app.get("/page/*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "Client/build/index.html"));
+//   });
+// }
 
 //Start Server
 server.listen(port, () => {

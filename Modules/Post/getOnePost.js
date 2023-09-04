@@ -20,7 +20,6 @@ const getOnePost = (req, res, next) => {
         data.forEach((com) => {
           comments.push(com);
         });
-        console.log(comments);
         return res.json({ post: postData, comments: comments });
       }
     })

@@ -2,7 +2,6 @@ const comment = require("../../Models/comments.model");
 const post = require("../../Models/posts.model");
 
 const commentOnPost = (req, res, next) => {
-  console.log(req.body);
   if (req.body.body.trim() === "") {
     return res.status(400).json({ comment: "Must not be Empty" });
   }
