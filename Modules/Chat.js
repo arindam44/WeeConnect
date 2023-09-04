@@ -81,7 +81,7 @@ const findThreads = (req, res, next) => {
       if (Object.keys(data).length > 0) {
         const cleanedThread = cleanThread(data, user);
         res.status(200).json(cleanedThread);
-      }
+      } else res.status(200).json([])
     })
     .catch((err) => {
       res.json({ error: err });

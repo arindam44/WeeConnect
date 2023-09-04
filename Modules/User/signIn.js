@@ -6,7 +6,6 @@ const signIn = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
-
   //VALIDATE EMAIL
   const { valid, errors } = validateLoginData(loginUser);
 
